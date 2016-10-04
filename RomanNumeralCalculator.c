@@ -240,4 +240,35 @@
             posPtr = posPtr + sizeof(char);
          }
       }
+   }
+
+   /*************** Function: concatNumeral ********************
+
+       Input: char *source, char *target -> target is pointer
+                         to original string, source is the char
+                         to concatenate
+
+      Output: char *result   ->    pointer to concatenated string
+
+     Purpose: Produces string by concatenating character to an
+              existing string
+   ***************************************************************/
+   char *concatNumeral(char *source, char *target)
+   {
+      char *result = malloc(STRING_SIZE);
+      char *insertPos = result;
+      char *ptr = target;
+
+      while (*ptr != '\0')
+      {
+         *insertPos = *ptr;
+
+         insertPos = insertPos + sizeof(char);
+         ptr = ptr + sizeof(char); 
+      }
+
+      *insertPos = *source;
+      *(insertPos + sizeof(char)) = '\0';
+
+      return result;
    } 

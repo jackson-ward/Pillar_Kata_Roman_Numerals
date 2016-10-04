@@ -18,4 +18,5 @@
    void assertStringNumeralNegativeElementsAreCategorizedCorrectlyGeneralSize();
    void assertCharacterRemovedFromStringProperly();
    void assertPositivesAndNegativesCancelForAddition();
+   void assertProperConcatenationOfNumeralToEmptyString();
    #endif // TB_H

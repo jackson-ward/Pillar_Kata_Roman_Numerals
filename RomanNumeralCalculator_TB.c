@@ -25,6 +25,7 @@
       assertStringNumeralNegativeElementsAreCategorizedCorrectlyGeneralSize(); // run test 8
       assertCharacterRemovedFromStringProperly(); // run test 9
       assertPositivesAndNegativesCancelForAddition(); // run test 10
+      assertProperConcatenationOfNumeralToEmptyString(); // run test 11
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -363,4 +364,25 @@
       assert(*posPtr == 'X');
       assert(*(posPtr + sizeof(char)) == '\0');
       assert(*negPtr == '\0');
-   }   
+   }  
+
+   /******** Function: assertProperConcatenationOfNumeralToEmptyString **********
+       Input: none
+       Output: none
+       Description: Assert that function concatNumeral adds a numeral to the
+                    end of an empty string properly 
+              
+   ***************************************************************************/
+   void assertProperConcatenationOfNumeralToEmptyString()
+   {
+      char input1[1] = {'\0'};
+      char input2[1] = {'I'};
+
+      char *target = input1;
+      char *source = input2;
+
+      target = concatNumeral(source, target);
+
+      assert(*target == 'I');
+      assert(*(target + sizeof(char)) == '\0');
+   } 
