@@ -129,3 +129,44 @@
 
       return result;
    }
+
+   /*********** Function: extractNegativeElements ***************
+
+       Input: char *input -> pointer to input string
+
+      Output: char *result -> pointer to resultant string
+
+     Purpose: Allocates memory for a return string, populates
+              the return string with the negative elements of
+              the string pointed to by input.
+   ***************************************************************/
+   char *extractNegativeElements(char *input)
+   {
+      char *result = malloc(sizeof(char) * 3);
+      char *insertPos = result;
+      char *ptr = input;
+      char *nextPtr = input + sizeof(char);
+
+      while (*nextPtr != '\0')
+      {
+         int compareResult = compare_NumeralA_to_NumeralB(ptr, nextPtr);
+
+         if (compareResult == 2)
+         {
+            *insertPos = *ptr;
+
+            insertPos = insertPos + sizeof(char);
+            ptr = ptr + sizeof(char);
+            nextPtr = nextPtr + sizeof(char);
+         }
+
+         ptr = ptr + sizeof(char);
+         nextPtr = nextPtr + sizeof(char);
+
+      }
+
+      *insertPos = '\0';
+
+      return result;
+   }
+  

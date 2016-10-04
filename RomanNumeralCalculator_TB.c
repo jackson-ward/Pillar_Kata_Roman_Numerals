@@ -19,7 +19,8 @@
       assertCorrectResultWhenComparingTheSizeOf2CharacterNumerals(); // run Test 2
       assertStringNumeralPositveElementsAreCategorizedCorrectly(); // run test 3
       assertStringNumeralPositiveElementsAreCategorizedCorrectlySpecialCases(); // run test 4
-      assertStringNumeralPositiveElementsAreCategorizedCorrectlyGeneralSize(); // reun test 5
+      assertStringNumeralPositiveElementsAreCategorizedCorrectlyGeneralSize(); // run test 5
+      assertStringNumeralNegativeElementsAreCategorizedCorrectly(); // run test 6
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -233,3 +234,26 @@
       assert(*(ptr + sizeof(char) * 6) == '\0');
       free(ptr);
    }
+
+   /******** Function: assertStringNumeralNegativeElementsAreCategorizedCorrectly **********
+       Input: none
+       Output: none
+       Description: Assert that function 'extractNegativeElements' returns "XI\0" when 
+                    "CXLIV\0" is given as input.
+                      
+   ******************************************************************************************/
+   void assertStringNumeralNegativeElementsAreCategorizedCorrectly()
+   {
+      char input[6] = {'C', 'X', 'L', 'I', 'V', '\0'};
+
+      char *ptr;
+
+      ptr = extractNegativeElements(input);
+
+      assert(*ptr     == 'X');
+      assert(*(ptr + sizeof(char)) == 'I');
+      assert(*(ptr + sizeof(char) * 2) == '\0');
+
+      free(ptr);
+   }
+
