@@ -9,6 +9,7 @@
 
    #include <assert.h> // import for use of assert();
    #include <stdio.h>  // import for use of printf();
+   #include <stdlib.h>
    #include "RomanNumeralCalculator_TB.h"
    #include "RomanNumeralCalculator.h"
 
@@ -16,7 +17,7 @@
    {
       assertDetectionOfProperNumeralInput(); // run Test 1
       assertCorrectResultWhenComparingTheSizeOf2CharacterNumerals(); // run Test 2
-
+      assertStringNumeralPositveElementsAreCategorizedCorrectly(); // run test 3
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -150,4 +151,26 @@
       assert(compare_NumeralA_to_NumeralB(M, M) ==  0);
 
       assert(compare_NumeralA_to_NumeralB(I, Z) == -1);
+   }
+   
+   /******** Function: assertStringNumeralPositveElementsAreCategorizedCorrectly **********
+       Input: none
+       Output: none
+       Description: Assert that function 'extractPositiveElements' returns "CLV" when 
+                    "CXLIV" is given as input.
+                      
+   ******************************************************************************************/
+   void assertStringNumeralPositveElementsAreCategorizedCorrectly()
+   {
+      char input[6] = {'C', 'X', 'L', 'I', 'V', '\0'};
+
+      char *ptr;
+
+      ptr = extractPositiveElements(input);
+
+      assert(*ptr     == 'C');
+      assert(*(ptr + sizeof(char)) == 'L');
+      assert(*(ptr + sizeof(char) * 2) == 'V');
+
+      free(ptr);  
    }

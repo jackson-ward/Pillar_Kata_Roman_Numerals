@@ -16,4 +16,5 @@
 
    bool checkForProperInputChar(char *);
    int  compare_NumeralA_to_NumeralB(char *, char *);
+   char *extractPositiveElements(char *);
    #endif // ROM_NUM_CALC_H

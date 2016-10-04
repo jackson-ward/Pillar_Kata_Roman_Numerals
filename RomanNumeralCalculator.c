@@ -7,6 +7,7 @@
    */
 
    #include "RomanNumeralCalculator.h"
+   #include <stdlib.h>
 
    /*********** Function: checkForProperInputChar ***************
 
@@ -81,4 +82,43 @@
       }
 
       return -1;
+   }
+   
+   /*********** Function: extractPositiveElements ***************
+
+       Input: char *input -> pointer to input string
+
+      Output: char *result -> pointer to resultant string
+
+     Purpose: Allocates memory for a return string, populates
+              the return string with the positive elements of
+              the string pointed to by input.
+   ***************************************************************/
+   char *extractPositiveElements(char *input)
+   {
+      char *result = malloc(sizeof(char) * 4);
+      char *insertPos = result;
+      char *ptr = input;
+      char *nextPtr = input + sizeof(char);
+
+      while (*nextPtr != '\0')
+      {
+         int compareResult = compare_NumeralA_to_NumeralB(ptr, nextPtr);
+        
+         if (compareResult == 0 || compareResult == 1)
+         {
+            *insertPos = *ptr;
+
+            insertPos = insertPos + sizeof(char);
+	 }
+           
+         ptr = ptr + sizeof(char);
+         nextPtr = nextPtr + sizeof(char);
+         
+      }
+
+      *insertPos = *ptr;
+      *(insertPos + sizeof(char)) = '\0';
+
+      return result;
    }
