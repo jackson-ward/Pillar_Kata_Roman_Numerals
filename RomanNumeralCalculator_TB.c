@@ -22,6 +22,7 @@
       assertStringNumeralPositiveElementsAreCategorizedCorrectlyGeneralSize(); // run test 5
       assertStringNumeralNegativeElementsAreCategorizedCorrectly(); // run test 6
       assertStringNumeralNegativeElementsAreCategorizedCorrectlySpecialCases(); // run test 7
+      assertStringNumeralNegativeElementsAreCategorizedCorrectlyGeneralSize(); // run test 8
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -287,3 +288,31 @@
       free(ptr);
    }
     
+   /******** Function: assertStringNumeralNegativeElementsAreCategorizedCorrectlyGeneralSize **********
+       Input: none
+       Output: none
+       Description: Assert that function 'extractNegativeElements' returns correct results for 
+                    arbitraily sized input. 
+
+                    Testing Inputs: "IX\0" and "MMMCMXCIX\0"
+                      
+   ****************************************************************************************************/
+   void assertStringNumeralNegativeElementsAreCategorizedCorrectlyGeneralSize()
+   {
+      char input1[3] = {'I', 'X', '\0'};
+      char input2[10] = {'M', 'M', 'M', 'C', 'M', 'X', 'C', 'I', 'X', '\0'};
+
+      char *ptr;
+
+      ptr = extractNegativeElements(input1);
+      assert(*ptr == 'I');
+      assert(*(ptr + sizeof(char)) == '\0');
+      free(ptr);
+
+      ptr = extractNegativeElements(input2);
+      assert(*ptr == 'C');
+      assert(*(ptr + sizeof(char)) == 'X');
+      assert(*(ptr + sizeof(char) * 2) == 'I');
+      assert(*(ptr + sizeof(char) * 3) == '\0');
+      free(ptr);
+   }

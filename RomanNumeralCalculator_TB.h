@@ -15,4 +15,5 @@
    void assertStringNumeralPositiveElementsAreCategorizedCorrectlyGeneralSize();
    void assertStringNumeralNegativeElementsAreCategorizedCorrectly();
    void assertStringNumeralNegativeElementsAreCategorizedCorrectlySpecialCases();
+   void assertStringNumeralNegativeElementsAreCategorizedCorrectlyGeneralSize();
    #endif // TB_H

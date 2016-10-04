@@ -142,7 +142,7 @@
    ***************************************************************/
    char *extractNegativeElements(char *input)
    {
-      char *result = malloc(sizeof(char) * 3);
+      char *result = malloc(sizeof(input));
       char *insertPos = result;
       char *ptr = input;
 
