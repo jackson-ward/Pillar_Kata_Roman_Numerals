@@ -18,6 +18,7 @@
       assertDetectionOfProperNumeralInput(); // run Test 1
       assertCorrectResultWhenComparingTheSizeOf2CharacterNumerals(); // run Test 2
       assertStringNumeralPositveElementsAreCategorizedCorrectly(); // run test 3
+      assertStringNumeralPositiveElementsAreCategorizedCorrectlySpecialCases(); // run test 4
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -173,4 +174,28 @@
       assert(*(ptr + sizeof(char) * 2) == 'V');
 
       free(ptr);  
+   }
+   
+   /******** Function: assertStringNumeralPositveElementsAreCategorizedCorrectlySpecialCases **********
+       Input: none
+       Output: none
+       Description: Assert that function 'extractPositiveElements' returns "\0" when input is "\0"
+                    and "X" when input is "X\0"
+                      
+   ******************************************************************************************/
+   void assertStringNumeralPositiveElementsAreCategorizedCorrectlySpecialCases()
+   {
+      char input1[1] = {'\0'};
+      char input2[2] = {'X', '\0'};
+
+      char *ptr;
+
+      ptr = extractPositiveElements(input1);
+      assert(*ptr == '\0');
+      free(ptr);
+
+      ptr = extractPositiveElements(input2);
+      assert(*ptr == 'X');
+      assert(*(ptr + sizeof(char)) == '\0');
+      free(ptr);
    }

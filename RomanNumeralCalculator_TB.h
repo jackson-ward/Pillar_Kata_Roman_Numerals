@@ -11,4 +11,5 @@
    void assertDetectionOfProperNumeralInput();
    void assertCorrectResultWhenComparingTheSizeOf2CharacterNumerals();
    void assertStringNumeralPositveElementsAreCategorizedCorrectly();
+   void assertStringNumeralPositiveElementsAreCategorizedCorrectlySpecialCases();
    #endif // TB_H
