@@ -19,4 +19,5 @@
    void assertCharacterRemovedFromStringProperly();
    void assertPositivesAndNegativesCancelForAddition();
    void assertProperConcatenationOfNumeralToEmptyString();
+   void assertProperConcatenationIntoNonEmptyString();
    #endif // TB_H
