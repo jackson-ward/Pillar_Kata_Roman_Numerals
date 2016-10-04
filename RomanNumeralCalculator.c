@@ -8,6 +8,7 @@
 
    #include "RomanNumeralCalculator.h"
    #include <stdlib.h>
+   #include <stdio.h>  
 
    /*********** Function: checkForProperInputChar ***************
 
@@ -96,7 +97,7 @@
    ***************************************************************/
    char *extractPositiveElements(char *input)
    {
-      char *result = malloc(sizeof(*input));
+      char *result = malloc(STRING_SIZE);
       char *insertPos = result;
       char *ptr = input;
 
@@ -142,7 +143,7 @@
    ***************************************************************/
    char *extractNegativeElements(char *input)
    {
-      char *result = malloc(sizeof(input));
+      char *result = malloc(STRING_SIZE);
       char *insertPos = result;
       char *ptr = input;
 

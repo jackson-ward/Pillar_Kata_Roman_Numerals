@@ -11,7 +11,7 @@
    
    #include <stdbool.h> // import for use of type <bool>
 
-
+   #define STRING_SIZE sizeof(char)*31
    // Function Declarations
 
    bool checkForProperInputChar(char *);
