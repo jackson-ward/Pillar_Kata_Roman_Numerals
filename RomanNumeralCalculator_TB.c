@@ -19,6 +19,7 @@
       assertCorrectResultWhenComparingTheSizeOf2CharacterNumerals(); // run Test 2
       assertStringNumeralPositveElementsAreCategorizedCorrectly(); // run test 3
       assertStringNumeralPositiveElementsAreCategorizedCorrectlySpecialCases(); // run test 4
+      assertStringNumeralPositiveElementsAreCategorizedCorrectlyGeneralSize(); // reun test 5
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -197,5 +198,38 @@
       ptr = extractPositiveElements(input2);
       assert(*ptr == 'X');
       assert(*(ptr + sizeof(char)) == '\0');
+      free(ptr);
+   }
+
+   /******** Function: assertStringNumeralPositiveElementsAreCategorizedCorrectlyGeneralSize **********
+       Input: none
+       Output: none
+       Description: Assert that function 'extractPositiveElements' returns correct results for 
+                    arbitraily sized input. 
+
+                    Testing Inputs: "XX\0" and "MMMCMXCIX\0"
+                      
+   ****************************************************************************************************/
+   void assertStringNumeralPositiveElementsAreCategorizedCorrectlyGeneralSize()
+   {
+      char input1[3] = {'X', 'X', '\0'};
+      char input2[10] = {'M', 'M', 'M', 'C', 'M', 'X', 'C', 'I', 'X', '\0'};
+      
+      char *ptr;
+
+      ptr = extractPositiveElements(input1);
+      assert(*ptr == 'X');
+      assert(*(ptr + sizeof(char)) == 'X');
+      assert(*(ptr + sizeof(char) * 2) == '\0');
+      free(ptr);
+
+      ptr = extractPositiveElements(input2);
+      assert(*ptr == 'M');
+      assert(*(ptr + sizeof(char)) == 'M');
+      assert(*(ptr + sizeof(char) * 2) == 'M');
+      assert(*(ptr + sizeof(char) * 3) == 'M');
+      assert(*(ptr + sizeof(char) * 4) == 'C');
+      assert(*(ptr + sizeof(char) * 5) == 'X');
+      assert(*(ptr + sizeof(char) * 6) == '\0');
       free(ptr);
    }

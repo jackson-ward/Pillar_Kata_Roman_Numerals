@@ -12,4 +12,5 @@
    void assertCorrectResultWhenComparingTheSizeOf2CharacterNumerals();
    void assertStringNumeralPositveElementsAreCategorizedCorrectly();
    void assertStringNumeralPositiveElementsAreCategorizedCorrectlySpecialCases();
+   void assertStringNumeralPositiveElementsAreCategorizedCorrectlyGeneralSize();
    #endif // TB_H

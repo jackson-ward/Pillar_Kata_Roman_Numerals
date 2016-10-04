@@ -96,7 +96,7 @@
    ***************************************************************/
    char *extractPositiveElements(char *input)
    {
-      char *result = malloc(sizeof(char) * 4);
+      char *result = malloc(sizeof(*input));
       char *insertPos = result;
       char *ptr = input;
 
