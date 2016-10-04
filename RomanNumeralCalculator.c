@@ -200,4 +200,44 @@
 
          ptr = ptr + sizeof(char); 
       }         
+   }
+
+   /*************** Function: cancelNumerals ********************
+
+       Input: char *pos, char *neg -> pointers to positive
+                                      and negative strings
+
+      Output: none
+
+     Purpose: Removes Numerals from the positive and negative
+              strings if they appear in both 
+   ***************************************************************/
+   void cancelNumerals(char *pos, char *neg)
+   {
+      char *posPtr = pos;
+      char *negPtr = neg;
+
+      while (*posPtr != '\0')
+      {
+         while (*negPtr != '\0')
+         {
+            if (*posPtr == *negPtr)
+            {
+               removeNumeralFromString(posPtr);
+               removeNumeralFromString(negPtr);
+               
+               negPtr = neg;
+            }
+
+            else
+            {
+               negPtr = negPtr + sizeof(char);
+            }
+         }
+         
+	 if (*posPtr != '\0')
+         {
+            posPtr = posPtr + sizeof(char);
+         }
+      }
    } 

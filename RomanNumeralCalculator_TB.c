@@ -24,6 +24,7 @@
       assertStringNumeralNegativeElementsAreCategorizedCorrectlySpecialCases(); // run test 7
       assertStringNumeralNegativeElementsAreCategorizedCorrectlyGeneralSize(); // run test 8
       assertCharacterRemovedFromStringProperly(); // run test 9
+      assertPositivesAndNegativesCancelForAddition(); // run test 10
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -339,4 +340,27 @@
       assert(*ptr == 'X');
       assert(*(ptr + sizeof(char)) == 'X');
       assert(*(ptr + sizeof(char) * 2) == '\0');  
-   } 
+   }
+
+   /******** Function: assertPositivesAndNegativesCancelForAddition **********
+       Input: none
+       Output: none
+       Description: Assert that function cancelNumerals removes
+                    numerals that appear in both the positive and negative
+                    strings. 
+              
+   ***************************************************************************/
+   void assertPositivesAndNegativesCancelForAddition()
+   {
+      char input1[3] = {'I', 'X', '\0'};
+      char input2[2] = {'I', '\0'};
+
+      char *posPtr = input1;
+      char *negPtr = input2;
+
+      cancelNumerals(posPtr, negPtr);
+
+      assert(*posPtr == 'X');
+      assert(*(posPtr + sizeof(char)) == '\0');
+      assert(*negPtr == '\0');
+   }   
