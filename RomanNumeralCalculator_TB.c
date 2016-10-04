@@ -23,6 +23,7 @@
       assertStringNumeralNegativeElementsAreCategorizedCorrectly(); // run test 6
       assertStringNumeralNegativeElementsAreCategorizedCorrectlySpecialCases(); // run test 7
       assertStringNumeralNegativeElementsAreCategorizedCorrectlyGeneralSize(); // run test 8
+      assertCharacterRemovedFromStringProperly(); // run test 9
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -203,7 +204,7 @@
       assert(*(ptr + sizeof(char)) == '\0');
       free(ptr);
    }
-
+   
    /******** Function: assertStringNumeralPositiveElementsAreCategorizedCorrectlyGeneralSize **********
        Input: none
        Output: none
@@ -317,4 +318,25 @@
       free(ptr);
    }
 
-   
+   /******** Function: assertCharacterRemovedFromStringProperly **********
+       Input: none
+       Output: none
+       Description: Assert that function 'removeNumeralFromString'
+                    transforms 'XIX\0' into 'XX\0' when given a
+                    pointer to 'I' as input. 
+              
+   ***********************************************************************/
+   void assertCharacterRemovedFromStringProperly()
+   {
+      char input[4] = {'X', 'I', 'X', '\0'};
+      
+      char *ptr = &input[1];
+
+      removeNumeralFromString(ptr);
+
+      ptr = input;
+
+      assert(*ptr == 'X');
+      assert(*(ptr + sizeof(char)) == 'X');
+      assert(*(ptr + sizeof(char) * 2) == '\0');  
+   } 

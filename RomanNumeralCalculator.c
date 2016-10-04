@@ -180,4 +180,24 @@
 
       return result;
    }
-  
+
+   /*********** Function: removeNumeralFromString ***************
+
+       Input: char *target -> pointer to character to remove
+
+      Output: none
+
+     Purpose: Removes a character from a string by moving
+              everything past the character to the right. 
+   ***************************************************************/ 
+   void removeNumeralFromString(char *target)
+   {
+      char *ptr = target;
+        
+      while (*ptr != '\0')
+      {
+         *ptr = *(ptr + 1);
+
+         ptr = ptr + sizeof(char); 
+      }         
+   } 
