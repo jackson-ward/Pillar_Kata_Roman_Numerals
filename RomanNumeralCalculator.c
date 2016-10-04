@@ -38,3 +38,47 @@
       
       return result;
    }
+
+   /*********** Function: compare_NumeralA_to_NumeralB ***************
+
+       Input: char *A, char *B -> pointers to characters to compare
+
+      Output: int result -> signifies result of operation
+
+     Purpose: Returns a 0 if A and B are equal, a 1 if A is bigger
+              than B, a 2 if A is smaller than B, and -1 if the
+              given inputs were invalid
+   ***************************************************************/
+   int compare_NumeralA_to_NumeralB(char *A, char *B)
+   {
+      if (!checkForProperInputChar(A) || !checkForProperInputChar(B))
+      {
+           return -1;
+      }
+
+      char hierarchy[8] = {'I', 'V', 'X', 'L', 'C', 'D', 'M', '\0'};
+
+      char *ptr = hierarchy;
+
+      while (*ptr != '\0')
+      {
+         if (*A == *ptr && *B == *ptr)
+         {
+            return 0;
+         }
+
+         else if (*A == *ptr)
+         {
+            return 2;
+         }
+
+         else if (*B == *ptr)
+         {
+            return 1;
+         }
+
+         ptr = ptr + sizeof(char);
+      }
+
+      return -1;
+   }

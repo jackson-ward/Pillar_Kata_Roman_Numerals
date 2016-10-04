@@ -9,5 +9,5 @@
    #define TB_H
 
    void assertDetectionOfProperNumeralInput();
-
+   void assertCorrectResultWhenComparingTheSizeOf2CharacterNumerals();
    #endif // TB_H

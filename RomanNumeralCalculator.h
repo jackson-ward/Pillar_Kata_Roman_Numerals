@@ -15,5 +15,5 @@
    // Function Declarations
 
    bool checkForProperInputChar(char *);
-
+   int  compare_NumeralA_to_NumeralB(char *, char *);
    #endif // ROM_NUM_CALC_H
