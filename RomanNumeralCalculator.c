@@ -145,6 +145,13 @@
       char *result = malloc(sizeof(char) * 3);
       char *insertPos = result;
       char *ptr = input;
+
+      if (*ptr == '\0')
+      {
+         *result = '\0';
+         return result;
+      }
+
       char *nextPtr = input + sizeof(char);
 
       while (*nextPtr != '\0')
@@ -161,8 +168,11 @@
          }
 
          ptr = ptr + sizeof(char);
-         nextPtr = nextPtr + sizeof(char);
 
+         if (*nextPtr != '\0')
+         {
+            nextPtr = nextPtr + sizeof(char);
+         }
       }
 
       *insertPos = '\0';

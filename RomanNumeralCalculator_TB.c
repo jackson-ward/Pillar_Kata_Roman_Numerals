@@ -21,6 +21,7 @@
       assertStringNumeralPositiveElementsAreCategorizedCorrectlySpecialCases(); // run test 4
       assertStringNumeralPositiveElementsAreCategorizedCorrectlyGeneralSize(); // run test 5
       assertStringNumeralNegativeElementsAreCategorizedCorrectly(); // run test 6
+      assertStringNumeralNegativeElementsAreCategorizedCorrectlySpecialCases(); // run test 7
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -257,3 +258,32 @@
       free(ptr);
    }
 
+    /******** Function: assertStringNumeralNegativeElementsAreCategorizedCorrectlySpecialCases **********
+       Input: none
+       Output: none
+       Description: Assert that function 'extractNegativeElements' returns "\0" when input is "\0",
+                    "\0" when input is "X\0", and "I\0" when input is "IX\0"
+                      
+   ******************************************************************************************/
+   void assertStringNumeralNegativeElementsAreCategorizedCorrectlySpecialCases()
+   {
+      char input1[1] = {'\0'};
+      char input2[2] = {'X', '\0'};
+      char input3[3] = {'I', 'X', '\0'};
+
+      char *ptr;
+
+      ptr = extractNegativeElements(input1);
+      assert(*ptr == '\0');
+      free(ptr);
+
+      ptr = extractNegativeElements(input2);
+      assert(*ptr == '\0');
+      free(ptr);
+
+      ptr = extractNegativeElements(input3);
+      assert(*ptr == 'I');
+      assert(*(ptr + sizeof(char)) == '\0');
+      free(ptr);
+   }
+    
