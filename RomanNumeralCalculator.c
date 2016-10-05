@@ -253,24 +253,19 @@
      Purpose: Produces string by concatenating character to an
               existing string
    ***************************************************************/
-   char *concatNumeral(char *source, char *target)
+   void concatNumeral(char *source, char *target)
    {
-      char *result = malloc(STRING_SIZE);
-      char *insertPos = result;
-      char *ptr = target;
+      //char *result = malloc(STRING_SIZE);
+      char *insertPos = target;
 
-      while (*ptr != '\0')
+      while (*insertPos != '\0')
       {
-         *insertPos = *ptr;
-
          insertPos = insertPos + sizeof(char);
-         ptr = ptr + sizeof(char); 
+ 
       }
 
       *insertPos = *source;
       *(insertPos + sizeof(char)) = '\0';
-
-      return result;
    }
 
    /*************** Function: addNumerals *************************
@@ -285,19 +280,21 @@
    char *addNumerals(char *a, char *b)
    {
       char *result = malloc(STRING_SIZE);
-      char *ptr = b; 
+      char *ptr = a; 
 
-      result = a;
+      while(*ptr != '\0')
+      {
+         concatNumeral(ptr, result);
+         ptr = ptr + sizeof(char);
+      }
+
+      ptr = b;
       
       while (*ptr != '\0')
       {
-         result = concatNumeral(ptr, result);
+         concatNumeral(ptr, result);
          ptr = ptr + sizeof(char);
       }
 
       return result;
    }
-
-
-   
-

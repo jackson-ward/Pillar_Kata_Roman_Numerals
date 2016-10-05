@@ -384,9 +384,9 @@
       char *target = malloc(STRING_SIZE);
       char *source = input2;
 
-      target = input1;
+      *target = input1[0];
 
-      target = concatNumeral(source, target);
+      concatNumeral(source, target);
 
       assert(*target == 'I');
       assert(*(target + sizeof(char)) == '\0');
@@ -409,9 +409,10 @@
       char *target = malloc(STRING_SIZE);
       char *source = input2;
 
-      target = input1;
+      *target = input1[0];
+      *(target + sizeof(char)) = input1[1];
 
-      target = concatNumeral(source, target);
+      concatNumeral(source, target);
 
       assert(*target == 'X');
       assert(*(target + sizeof(char)) == 'I');
@@ -466,4 +467,4 @@
 
       free(result);
    } 
-
+   

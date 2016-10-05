@@ -18,8 +18,9 @@
    int  compare_NumeralA_to_NumeralB(char *, char *);
    char *extractPositiveElements(char *);
    char *extractNegativeElements(char *);
-   char *concatNumeral(char *, char *);
+   void concatNumeral(char *, char *);
    char *addNumerals(char *, char *);
    void removeNumeralFromString(char *);
    void cancelNumerals(char *, char *);
+   void countAndCorrectForOnesRule(char *);
    #endif // ROM_NUM_CALC_H
