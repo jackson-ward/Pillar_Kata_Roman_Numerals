@@ -26,4 +26,5 @@
    void assert_IplusIII_Equals_IV();
    void assert_IplusV_Equals_VI();
    void assert_IplusIV_Equals_V();
+   void assert_IVplusI_Equals_V();
    #endif // TB_H
