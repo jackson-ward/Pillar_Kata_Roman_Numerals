@@ -26,7 +26,8 @@
       assertCharacterRemovedFromStringProperly(); // run test 9
       assertPositivesAndNegativesCancelForAddition(); // run test 10
       assertProperConcatenationOfNumeralToEmptyString(); // run test 11
-      assertProperConcatenationIntoNonEmptyString();
+      assertProperConcatenationIntoNonEmptyString(); // run test 12
+      assert_IplusI_Equals_II(); // run test 13
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -412,4 +413,27 @@
       assert(*(target + sizeof(char) * 2) == '\0');
 
       free(target);
+   }
+
+   /*************** Function: assert_I+I_Equals_II *************\
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('I', 'I') returns
+                    II.
+   **************************************************************/
+   void assert_IplusI_Equals_II()
+   {
+      char input1[2] = {'I', '\0'};
+      char input2[2] = {'I', '\0'};
+
+      char *a = input1;
+      char *b = input2;
+
+      char *result = addNumerals(a, b);
+
+      assert(*result == 'I');
+      assert(*(result + sizeof(char)) == 'I');
+      assert(*(result + sizeof(char) * 2) == '\0');
+
+      free(result);
    } 

@@ -20,4 +20,6 @@
    void assertPositivesAndNegativesCancelForAddition();
    void assertProperConcatenationOfNumeralToEmptyString();
    void assertProperConcatenationIntoNonEmptyString();
+
+   void assert_IplusI_Equals_II();
    #endif // TB_H

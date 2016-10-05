@@ -271,4 +271,22 @@
       *(insertPos + sizeof(char)) = '\0';
 
       return result;
+   }
+
+   /*************** Function: addNumerals *************************
+
+       Input: char *a, char*b -> point to the heads of the strings
+                                 to be added
+
+      Output: char *result   ->    pointer to "sum" string
+
+     Purpose: Produces string by adding two input strings
+   ***************************************************************/
+   char *addNumerals(char *a, char *b)
+   {
+      char *result = malloc(STRING_SIZE);
+      
+      result = concatNumeral(b, a);
+
+      return result;
    } 
