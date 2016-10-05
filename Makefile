@@ -5,7 +5,7 @@
 # CREATED ON: 10/3/2016
 
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -g
 
 default: romanNumeralCalculatorTest
 

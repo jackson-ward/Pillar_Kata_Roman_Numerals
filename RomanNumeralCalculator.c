@@ -285,8 +285,19 @@
    char *addNumerals(char *a, char *b)
    {
       char *result = malloc(STRING_SIZE);
+      char *ptr = b; 
+
+      result = a;
       
-      result = concatNumeral(b, a);
+      while (*ptr != '\0')
+      {
+         result = concatNumeral(ptr, result);
+         ptr = ptr + sizeof(char);
+      }
 
       return result;
-   } 
+   }
+
+
+   
+

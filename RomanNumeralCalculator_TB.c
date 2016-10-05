@@ -27,7 +27,8 @@
       assertPositivesAndNegativesCancelForAddition(); // run test 10
       assertProperConcatenationOfNumeralToEmptyString(); // run test 11
       assertProperConcatenationIntoNonEmptyString(); // run test 12
-      assert_IplusI_Equals_II(); // run test 13
+      assert_IplusI_Equals_II(); // run Add Test 1 (test 13)
+      assert_IplusII_Equals_III(); // run Add Test 2 (test 14)
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -380,8 +381,10 @@
       char input1[1] = {'\0'};
       char input2[1] = {'I'};
 
-      char *target = input1;
+      char *target = malloc(STRING_SIZE);
       char *source = input2;
+
+      target = input1;
 
       target = concatNumeral(source, target);
 
@@ -403,8 +406,10 @@
       char input1[2] = {'X', '\0'};
       char input2[1] = {'I'};
 
-      char *target = input1;
+      char *target = malloc(STRING_SIZE);
       char *source = input2;
+
+      target = input1;
 
       target = concatNumeral(source, target);
 
@@ -436,4 +441,29 @@
       assert(*(result + sizeof(char) * 2) == '\0');
 
       free(result);
+   }
+   
+   /*************** Function: assert_I+II_Equals_III *************\
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('I', 'II') returns
+                    III.
+   **************************************************************/
+   void assert_IplusII_Equals_III()
+   {
+      char input1[2] = {'I', '\0'};
+      char input2[3] = {'I', 'I', '\0'};
+
+      char *a = input1;
+      char *b = input2;
+
+      char *result = addNumerals(a, b);
+
+      assert(*result == 'I');
+      assert(*(result + sizeof(char)) == 'I');
+      assert(*(result + sizeof(char) * 2) == 'I');
+      assert(*(result + sizeof(char) * 3) == '\0');
+
+      free(result);
    } 
+

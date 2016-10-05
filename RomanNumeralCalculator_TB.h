@@ -22,4 +22,5 @@
    void assertProperConcatenationIntoNonEmptyString();
 
    void assert_IplusI_Equals_II();
+   void assert_IplusII_Equals_III();
    #endif // TB_H
