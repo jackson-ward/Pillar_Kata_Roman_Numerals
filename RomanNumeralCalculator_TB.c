@@ -30,6 +30,7 @@
       assert_IplusI_Equals_II(); // run Add Test 1 (test 13)
       assert_IplusII_Equals_III(); // run Add Test 2 (test 14)
       assert_IplusIII_Equals_IV(); // run Add Test 3 (test 15)
+      assert_IplusV_Equals_VI(); // run Add Test 4 (test 16)
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -477,15 +478,34 @@
    **************************************************************/
    void assert_IplusIII_Equals_IV()
    {
-     char input1[2] = {'I', '\0'};
-     char input2[4] = {'I', 'I', 'I', '\0'};
+      char input1[2] = {'I', '\0'};
+      char input2[4] = {'I', 'I', 'I', '\0'};
 
-     char *result = addNumerals(input1, input2);
+      char *result = addNumerals(input1, input2);
 
-     assert(*result == 'I');
-     assert(*(result + sizeof(char)) == 'V');
-     assert(*(result + sizeof(char) * 2) == '\0');
+      assert(*result == 'I');
+      assert(*(result + sizeof(char)) == 'V');
+      assert(*(result + sizeof(char) * 2) == '\0');
 
-     free(result);
+      free(result);
    }
- 
+   
+   /*************** Function: assert_I+V_Equals_VI *************\
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('I', 'V') returns
+                    VI.
+   **************************************************************/
+   void assert_IplusV_Equals_VI()
+   {
+      char input1[2] = {'I', '\0'};
+      char input2[2] = {'V', '\0'};
+
+      char *result = addNumerals(input1, input2);
+
+      assert(*result == 'V');
+      assert(*(result + sizeof(char)) == 'I');
+      assert(*(result + sizeof(char) * 2) == '\0');
+
+      free(result);
+   } 

@@ -279,25 +279,46 @@
    ***************************************************************/
    char *addNumerals(char *a, char *b)
    {
-      char *result = malloc(STRING_SIZE);
-      char *ptr = a; 
+      char *posa = extractPositiveElements(a);
+      char *posb = extractPositiveElements(b);
+
+      char *ptr = posb;
 
       while(*ptr != '\0')
       {
-         concatNumeral(ptr, result);
+         concatNumeral(ptr, posa);
+         ptr = ptr + sizeof(char);
+      } 
+
+      ptr = posa;
+
+      while (*ptr != '\0')
+      {
+         if (compare_NumeralA_to_NumeralB(ptr, ptr + sizeof(char)) == 2)
+         {
+            char tmp = *ptr;
+            *ptr = *(ptr + sizeof(char));
+            *(ptr + sizeof(char)) = tmp;
+         }
+         
          ptr = ptr + sizeof(char);
       }
 
-      ptr = b;
+      ptr = posa;
       
+      char *result = malloc(STRING_SIZE);
+
       while (*ptr != '\0')
       {
          concatNumeral(ptr, result);
          ptr = ptr + sizeof(char);
       }
-
+      
       countAndCorrectForOnesRule(result);
 
+      free(posa);
+      free(posb);
+      
       return result;
    }
 
