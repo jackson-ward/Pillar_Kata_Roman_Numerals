@@ -281,6 +281,9 @@
    {
       char *posa = extractPositiveElements(a);
       char *posb = extractPositiveElements(b);
+      char *negb = extractNegativeElements(b);
+
+      cancelNumerals(posa, negb);
 
       char *ptr = posb;
 
@@ -318,6 +321,7 @@
 
       free(posa);
       free(posb);
+      free(negb);
       
       return result;
    }
