@@ -29,6 +29,7 @@
       assertProperConcatenationIntoNonEmptyString(); // run test 12
       assert_IplusI_Equals_II(); // run Add Test 1 (test 13)
       assert_IplusII_Equals_III(); // run Add Test 2 (test 14)
+      assert_IplusIII_Equals_IV(); // run Add Test 3 (test 15)
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -467,4 +468,24 @@
 
       free(result);
    } 
-   
+  
+   /*************** Function: assert_I+III_Equals_IV *************\
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('I', 'III') returns
+                    IV.
+   **************************************************************/
+   void assert_IplusIII_Equals_IV()
+   {
+     char input1[2] = {'I', '\0'};
+     char input2[4] = {'I', 'I', 'I', '\0'};
+
+     char *result = addNumerals(input1, input2);
+
+     assert(*result == 'I');
+     assert(*(result + sizeof(char)) == 'V');
+     assert(*(result + sizeof(char) * 2) == '\0');
+
+     free(result);
+   }
+ 

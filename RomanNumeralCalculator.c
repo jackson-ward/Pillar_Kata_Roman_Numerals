@@ -296,5 +296,51 @@
          ptr = ptr + sizeof(char);
       }
 
+      countAndCorrectForOnesRule(result);
+
       return result;
+   }
+
+   /*************** Function: countAndCorrectForOnesRule *************************
+
+       Input: char *input -> point to the head of string to modify
+
+      Output: none
+
+     Purpose: Produces string that doesn't violate ones rule
+   ******************************************************************************/
+   void countAndCorrectForOnesRule(char *input)
+   {
+      unsigned short cnt = 0;
+      char *ones[4];
+
+     char *ptr = input;
+
+      while (*ptr != '\0')
+      {
+         if (*ptr == 'I')
+         {
+            ones[cnt] = ptr;
+            cnt++;
+         }
+
+         ptr = ptr + sizeof(char);
+      }
+
+      if (cnt == 4)
+      {
+         char I = 'I';
+         char V = 'V';
+         char *i = &I;
+         char *v = &V;
+
+         int j;
+         for (j = 3; j >= 0; j--)
+         {
+            removeNumeralFromString(ones[j]);
+         }
+
+         concatNumeral(i, input);
+         concatNumeral(v, input);
+      }
    }
