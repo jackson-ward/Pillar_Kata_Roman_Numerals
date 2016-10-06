@@ -30,4 +30,5 @@
    void assert_XplusIV_Equals_XIV();
    void assert_VplusV_Equals_X();
    void assert_XXplusXX_Equals_XL();
+   void assert_LplusL_Equals_C();
    #endif // TB_H

@@ -322,6 +322,7 @@
       countAndCorrectForOnesRule(result);
       countAndCorrectForVsRule(result);
       countAndCorrectForXsRule(result);
+      countAndCorrectForLsRule(result);
 
       ptr = negb;
 
@@ -483,7 +484,45 @@
       }
       
    }
-   
+  
+   /*************** Function: countAndCorrectForLsRule *************************
+
+       Input: char *input -> point to the head of string to modify
+
+      Output: none
+
+     Purpose: Produces string that doesn't violate Ls rule
+   ******************************************************************************/
+   void countAndCorrectForLsRule(char *input)
+   {
+      char *ptr = input;
+
+      if (*ptr == '\0')
+      {
+         return;
+      }
+
+      char *nxt = ptr + sizeof(char);
+
+      while (*nxt != '\0')
+      {
+         if (*ptr == 'L' && *nxt == 'L')
+         {
+            removeNumeralFromString(nxt);
+            removeNumeralFromString(ptr);
+
+            char C = 'C';
+            char *c = &C;
+
+            insertNumeral(c, ptr);
+         }
+
+         ptr = nxt;
+         nxt = nxt + sizeof(char);
+      }
+
+   }
+ 
    /*************** Function: insertNumeral *************************
 
        Input: char *source -> pointer to numeral to insert
