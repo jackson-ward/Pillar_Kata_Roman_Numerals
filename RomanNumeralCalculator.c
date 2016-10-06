@@ -320,6 +320,7 @@
       }
       
       countAndCorrectForOnesRule(result);
+      countAndCorrectForVsRule(result);
 
       ptr = negb;
 
@@ -369,7 +370,7 @@
       unsigned short cnt = 0;
       char *ones[4];
 
-     char *ptr = input;
+      char *ptr = input;
 
       while (*ptr != '\0')
       {
@@ -400,6 +401,44 @@
       }
    }
 
+   /*************** Function: countAndCorrectForVsRule *************************
+
+       Input: char *input -> point to the head of string to modify
+
+      Output: none
+
+     Purpose: Produces string that doesn't violate v rule
+   ******************************************************************************/
+   void countAndCorrectForVsRule(char *input)
+   {
+      char *ptr = input;
+      
+      if (*ptr == '\0')
+      {
+         return;
+      }
+
+      char *nxt = ptr + sizeof(char);
+
+      while (*nxt != '\0')
+      {
+         if (*ptr == 'V' && *nxt == 'V')
+         {
+            removeNumeralFromString(nxt);
+            removeNumeralFromString(ptr);
+
+            char X = 'X';
+            char *x = &X;
+
+            insertNumeral(x, ptr);
+         }
+
+         ptr = nxt;
+         nxt = nxt + sizeof(char);
+      }
+      
+   }
+   
    /*************** Function: insertNumeral *************************
 
        Input: char *source -> pointer to numeral to insert

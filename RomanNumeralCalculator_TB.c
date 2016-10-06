@@ -34,6 +34,7 @@
       assert_IplusIV_Equals_V(); // run Add Test 5 (test 17)
       assert_IVplusI_Equals_V(); // run Add Test 6 (test 18)
       assert_XplusIV_Equals_XIV(); // run Add Test 7 (test 19)
+      assert_VplusV_Equals_X(); // run Add Test 8 (test 20)
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -568,6 +569,25 @@
       assert(*(result + sizeof(char)) == 'I');
       assert(*(result + sizeof(char) * 2) == 'V');
       assert(*(result + sizeof(char) * 3) == '\0');
+
+      free(result);
+   }
+
+   /*************** Function: assert_VplusV__Equals_X *************\
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('V', 'V') returns
+                    X.
+   ***************************************************************/
+   void assert_VplusV_Equals_X()
+   {
+      char input1[2] = {'V', '\0'};
+      char input2[2] = {'V', '\0'};
+
+      char *result = addNumerals(input1, input2);
+
+      assert(*result == 'X');
+      assert(*(result + sizeof(char)) == '\0');
 
       free(result);
    }
