@@ -289,7 +289,7 @@
 
       char *ptr = posb;
 
-      while(*ptr != '\0')
+      while (*ptr != '\0')
       {
          concatNumeral(ptr, posa);
          ptr = ptr + sizeof(char);
@@ -320,6 +320,33 @@
       }
       
       countAndCorrectForOnesRule(result);
+
+      ptr = negb;
+
+      while (*ptr != '\0')
+      {
+         concatNumeral(ptr, nega);
+         ptr = ptr + sizeof(char);
+      }
+
+      ptr = nega;
+      char *ptr2 = result;
+
+      while (*ptr2 != '\0')
+      {
+         ptr2 = ptr2 + sizeof(char);
+      }
+
+      while (*ptr != '\0')
+      {
+         if (compare_NumeralA_to_NumeralB(ptr, ptr2) == 2)
+         {
+            insertNumeral(ptr, ptr2);
+            ptr = ptr + sizeof(char);
+         }
+         
+         ptr2 = ptr2 - sizeof(char);
+      }
 
       free(posa);
       free(posb);
@@ -371,4 +398,35 @@
          concatNumeral(i, input);
          concatNumeral(v, input);
       }
+   }
+
+   /*************** Function: insertNumeral *************************
+
+       Input: char *source -> pointer to numeral to insert
+
+              char *target -> pointer to insertion location
+
+      Output: none
+
+     Purpose: Inserts a character into a string shifting left
+              all characters stored to the left of or in the
+              target location.
+   ******************************************************************/
+   void insertNumeral(char *source, char *target)
+   {
+      char *ptr = target;
+
+      while (*ptr != '\0')
+      {
+         ptr = ptr + sizeof(char);
+      }
+
+      while (ptr != (target - sizeof(char)))
+      {
+         *(ptr + sizeof(char)) = *ptr;
+         
+         ptr = ptr - sizeof(char);
+      }
+
+      *target = *source;
    }
