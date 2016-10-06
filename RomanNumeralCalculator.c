@@ -323,6 +323,7 @@
       countAndCorrectForVsRule(result);
       countAndCorrectForXsRule(result);
       countAndCorrectForLsRule(result);
+      countAndCorrectForCsRule(result);
 
       ptr = negb;
 
@@ -522,6 +523,50 @@
       }
 
    }
+
+   /*************** Function: countAndCorrectForCsRule *************************
+
+       Input: char *input -> point to the head of string to modify
+
+      Output: none
+
+     Purpose: Produces string that doesn't violate Cs rule
+   ******************************************************************************/
+   void countAndCorrectForCsRule(char *input)
+   {
+      unsigned short cnt = 0;
+      char *C_a[4];
+
+      char *ptr = input;
+
+      while (*ptr != '\0')
+      {
+         if (*ptr == 'C')
+         {
+            C_a[cnt] = ptr;
+            cnt++;
+         }
+
+         ptr = ptr + sizeof(char);
+      }
+
+      if (cnt == 4)
+      {
+         char C = 'C';
+         char D = 'D';
+         char *c = &C;
+         char *d = &D;
+
+         int j;
+         for (j = 3; j >= 0; j--)
+         {
+            removeNumeralFromString(C_a[j]);
+         }
+
+         concatNumeral(c, input);
+         concatNumeral(d, input);
+      }
+   }   
  
    /*************** Function: insertNumeral *************************
 

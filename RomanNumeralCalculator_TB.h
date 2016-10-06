@@ -31,4 +31,5 @@
    void assert_VplusV_Equals_X();
    void assert_XXplusXX_Equals_XL();
    void assert_LplusL_Equals_C();
+   void assert_CCplusL_CC_Equals_CD();
    #endif // TB_H
