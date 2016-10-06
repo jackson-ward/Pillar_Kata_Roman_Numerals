@@ -38,6 +38,7 @@
       assert_XXplusXX_Equals_XL(); // run Add Test 9 (test 21)
       assert_LplusL_Equals_C(); // run Add Test 10 (test 22)
       assert_CCplusL_CC_Equals_CD(); // run Add Test 11 (test 23)
+      assert_DplusD_Equals_M(); // run Add Test 12 (test 24)
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
@@ -650,6 +651,25 @@
       assert(*result == 'C');
       assert(*(result + sizeof(char)) == 'D');
       assert(*(result + sizeof(char) * 2) == '\0');
+
+      free(result);
+   }
+
+   /*************** Function: assert_DplusD_Equals_M *************\
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('D', 'D') returns
+                    M.
+   ***************************************************************/
+   void assert_DplusD_Equals_M()
+   {
+      char input1[2] = {'D', '\0'};
+      char input2[2] = {'D', '\0'};
+
+      char *result = addNumerals(input1, input2);
+
+      assert(*result == 'M');
+      assert(*(result + sizeof(char)) == '\0');
 
       free(result);
    }

@@ -28,4 +28,5 @@
    void countAndCorrectForXsRule(char *);
    void countAndCorrectForLsRule(char *);
    void countAndCorrectForCsRule(char *);
+   void countAndCorrectForDsRule(char *);
    #endif // ROM_NUM_CALC_H

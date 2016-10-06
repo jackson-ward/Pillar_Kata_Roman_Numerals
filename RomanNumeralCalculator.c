@@ -324,6 +324,7 @@
       countAndCorrectForXsRule(result);
       countAndCorrectForLsRule(result);
       countAndCorrectForCsRule(result);
+      countAndCorrectForDsRule(result);
 
       ptr = negb;
 
@@ -567,7 +568,45 @@
          concatNumeral(d, input);
       }
    }   
- 
+
+   /*************** Function: countAndCorrectForDsRule *************************
+
+       Input: char *input -> point to the head of string to modify
+
+      Output: none
+
+     Purpose: Produces string that doesn't violate Ds rule
+   ******************************************************************************/
+   void countAndCorrectForDsRule(char *input)
+   {
+      char *ptr = input;
+
+      if (*ptr == '\0')
+      {
+         return;
+      }
+
+      char *nxt = ptr + sizeof(char);
+
+      while (*nxt != '\0')
+      {
+         if (*ptr == 'D' && *nxt == 'D')
+         {
+            removeNumeralFromString(nxt);
+            removeNumeralFromString(ptr);
+
+            char M = 'M';
+            char *m = &M;
+
+            insertNumeral(m, ptr);
+         }
+
+         ptr = nxt;
+         nxt = nxt + sizeof(char);
+      }
+
+   }
+    
    /*************** Function: insertNumeral *************************
 
        Input: char *source -> pointer to numeral to insert
