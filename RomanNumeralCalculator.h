@@ -25,4 +25,5 @@
    void countAndCorrectForOnesRule(char *);
    void insertNumeral(char *, char *);
    void countAndCorrectForVsRule(char *);
+   void countAndCorrectForXsRule(char *);
    #endif // ROM_NUM_CALC_H

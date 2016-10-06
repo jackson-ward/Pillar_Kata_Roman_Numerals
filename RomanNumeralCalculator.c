@@ -321,6 +321,7 @@
       
       countAndCorrectForOnesRule(result);
       countAndCorrectForVsRule(result);
+      countAndCorrectForXsRule(result);
 
       ptr = negb;
 
@@ -398,6 +399,50 @@
 
          concatNumeral(i, input);
          concatNumeral(v, input);
+      }
+   }
+
+   /*************** Function: countAndCorrectForXsRule *************************
+
+       Input: char *input -> point to the head of string to modify
+
+      Output: none
+
+     Purpose: Produces string that doesn't violate Xs rule
+   ******************************************************************************/
+   void countAndCorrectForXsRule(char *input)
+   {
+      unsigned short cnt = 0;
+      char *X_a[4];
+
+      char *ptr = input;
+
+      while (*ptr != '\0')
+      {
+         if (*ptr == 'X')
+         {
+            X_a[cnt] = ptr;
+            cnt++;
+         }
+
+         ptr = ptr + sizeof(char);
+      }
+
+      if (cnt == 4)
+      {
+         char X = 'X';
+         char L = 'L';
+         char *x = &X;
+         char *l = &L;
+
+         int j;
+         for (j = 3; j >= 0; j--)
+         {
+            removeNumeralFromString(X_a[j]);
+         }
+
+         concatNumeral(x, input);
+         concatNumeral(l, input);
       }
    }
 
