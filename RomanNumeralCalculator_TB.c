@@ -48,6 +48,7 @@
       assert_IL_goes_to_XLIX(); // run Result_Fix Test 1 (test 31)
       assert_IC_goes_to_XCIX(); // run Result_Fix Test 2 (test 32)
       assert_ID_goes_to_CDXCIX(); // run Result_Fix Test 3 (test 32)
+      assert_IM_goes_to_CMXCIX(); // run Result_Fix Test 4 (test 33)
 
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
@@ -871,6 +872,27 @@
 
       assert(*input == 'C');
       assert(*(input + sizeof(char)) == 'D');
+      assert(*(input + sizeof(char) * 2) == 'X');
+      assert(*(input + sizeof(char) * 3) == 'C');
+      assert(*(input + sizeof(char) * 4) == 'I');
+      assert(*(input + sizeof(char) * 5) == 'X');
+      assert(*(input + sizeof(char) * 6) == '\0');
+   }
+
+   /*************** Function: assert_IM_goes_to_CMXCIX *************\
+       Input: none
+       Output: none
+       Description: Assert that call resultFix('IM') returns
+                    CMXCIX.
+   ***************************************************************/
+   void assert_IM_goes_to_CMXCIX()
+   {
+      char input[7] = {'I', 'M', '\0', '\0', '\0', '\0', '\0'};
+
+      resultFix(input);
+
+      assert(*input == 'C');
+      assert(*(input + sizeof(char)) == 'M');
       assert(*(input + sizeof(char) * 2) == 'X');
       assert(*(input + sizeof(char) * 3) == 'C');
       assert(*(input + sizeof(char) * 4) == 'I');

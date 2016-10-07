@@ -764,13 +764,14 @@
       char *nxt = ptr + sizeof(char);
       char *replacement = malloc(STRING_SIZE);
       bool armed = false;
-      static char I, X, L, C, D;
+      static char I, X, L, C, D, M;
      
       I = 'I';
       X = 'X';
       L = 'L';
       C = 'C';
       D = 'D';
+      M = 'M';
 
       *replacement = '\0';
       
@@ -804,9 +805,21 @@
                           concatNumeral(&X, replacement);
                           concatNumeral(&C, replacement);
                           concatNumeral(&I, replacement);
-                          concatNumeral(&X, replacement); 
+                          concatNumeral(&X, replacement);
+ 
                           armed = true;
                           break; 
+
+               case 'M':
+                          concatNumeral(&C, replacement);
+                          concatNumeral(&M, replacement);
+                          concatNumeral(&X, replacement);
+                          concatNumeral(&C, replacement);
+                          concatNumeral(&I, replacement);
+                          concatNumeral(&X, replacement);
+
+                          armed = true;
+                          break;
 
                 default:  break;
             } 
@@ -814,6 +827,8 @@
 
          if (armed)
          {
+            armed = false;
+
             removeNumeralFromString(ptr);
             removeNumeralFromString(ptr);
 
@@ -826,6 +841,13 @@
                ptr2 = ptr2 + sizeof(char);
             }
          }
+
+         else
+         {
+            ptr = ptr + sizeof(char);
+         }
+  
+         nxt = ptr + sizeof(char);
 
          *replacement = '\0';
       }
