@@ -319,15 +319,54 @@
          ptr = ptr + sizeof(char);
       }
       
+      ptr = negb;
+      char *ptr2 = nega;
+      bool armed = false;
+
+      while (*ptr != '\0')
+      {
+         while (*ptr2 != '\0')
+         {
+            if (*ptr == 'I' && *ptr2 == 'I')
+            {
+               removeNumeralFromString(ptr);
+               removeNumeralFromString(ptr2);
+               armed = true;
+
+               char *ptr3 = result;
+               while (*ptr3 != '\0' && armed)
+               {
+                  if (*ptr3 == 'V')
+                  {
+                     armed = false;
+
+                     char I = 'I';
+                     char *i = &I;
+
+                     removeNumeralFromString(ptr3);
+                     concatNumeral(i, ptr3);
+                     concatNumeral(i, ptr3);
+                     concatNumeral(i, ptr3);
+                  }
+
+                  ptr3 = ptr3 + sizeof(char);
+               }
+            }
+
+            ptr2 = ptr2 + sizeof(char);
+         }
+
+         ptr = ptr + sizeof(char);
+      }      
+
       countAndCorrectForOnesRule(result);
       countAndCorrectForVsRule(result);
       countAndCorrectForXsRule(result);
-      countAndCorrectForLsRule(result);
+      countAndCorrectForLsRule(result);      
       countAndCorrectForCsRule(result);
       countAndCorrectForDsRule(result);
 
       ptr = negb;
-
       while (*ptr != '\0')
       {
          concatNumeral(ptr, nega);
@@ -335,7 +374,7 @@
       }
 
       ptr = nega;
-      char *ptr2 = result;
+      ptr2 = result;
 
       while (*ptr2 != '\0')
       {
@@ -357,6 +396,8 @@
       free(posb);
       free(nega);
       free(negb);
+
+      ptr = result; while (*ptr != '\0') { printf("%c", *ptr); ptr = ptr + sizeof(char);} printf("\n");
       
       return result;
    }
