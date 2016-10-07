@@ -43,6 +43,7 @@
       assert_IXplusIX_Equals_XVIII(); // run Add Test 14 (test 26)
       assert_XLplusXL_Equals_LXXX(); // run Add Test 15 (test 27)
       assert_XCplusXC_Equals_CLXXX(); // run Add Test 16 (test 28)
+      assert_CDplusCD_Equals_DCCC(); // run Add Test 17 (test 29)
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       
@@ -766,6 +767,28 @@
       assert(*(result + sizeof(char) * 3) == 'X');
       assert(*(result + sizeof(char) * 4) == 'X');
       assert(*(result + sizeof(char) * 5) == '\0');
+
+      free(result);
+   }
+
+   /*************** Function: assert_CDplusCD_Equals_DCCC *************\
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('CD', 'CD') returns
+                    DCCC.
+   ***************************************************************/
+   void assert_CDplusCD_Equals_DCCC()
+   {
+      char input1[3] = {'C', 'D', '\0'};
+      char input2[3] = {'C', 'D', '\0'};
+
+      char *result = addNumerals(input1, input2);
+
+      assert(*result == 'D');
+      assert(*(result + sizeof(char)) == 'C');
+      assert(*(result + sizeof(char) * 2) == 'C');
+      assert(*(result + sizeof(char) * 3) == 'C'); 
+      assert(*(result + sizeof(char) * 4) == '\0');
 
       free(result);
    }
