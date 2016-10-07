@@ -764,8 +764,10 @@
 
       while (*ptr != '\0')
       {
-         if (*ptr == 'I' && *(ptr + sizeof(char)) == 'L')
+         if (*ptr == 'I' && (*(ptr + sizeof(char)) == 'L' || *(ptr + sizeof(char)) == 'C'))
          {
+
+            char substitute = *(ptr + sizeof(char));
             removeNumeralFromString(ptr);
             removeNumeralFromString(ptr);
             
@@ -773,8 +775,7 @@
             insertNumeral(&x, ptr);
             ptr = ptr + sizeof(char);
 
-            char l = 'L';
-            insertNumeral(&l, ptr);
+            insertNumeral(&substitute, ptr);
             ptr = ptr + sizeof(char);
 
             char i = 'I';

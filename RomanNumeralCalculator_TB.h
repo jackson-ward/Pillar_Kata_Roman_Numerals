@@ -41,4 +41,5 @@
    void assert_CMplusCM_Equals_MDCCC();
 
    void assert_IL_goes_to_XLIX();
+   void assert_IC_goes_to_XCIX();
    #endif // TB_H
