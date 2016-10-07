@@ -37,9 +37,10 @@
       assert_VplusV_Equals_X(); // run Add Test 8 (test 20)
       assert_XXplusXX_Equals_XL(); // run Add Test 9 (test 21)
       assert_LplusL_Equals_C(); // run Add Test 10 (test 22)
-      assert_CCplusL_CC_Equals_CD(); // run Add Test 11 (test 23)
+      assert_CCplusCC_Equals_CD(); // run Add Test 11 (test 23)
       assert_DplusD_Equals_M(); // run Add Test 12 (test 24)
       assert_IVplusIV_Equals_VIII(); // run Add Test 13 (test 25)
+      assert_IXplusIX_Equals_XVIII(); // run Add Test 14 (test 26)
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       
@@ -644,7 +645,7 @@
        Description: Assert that call addNumerals('CC', 'CC') returns
                     CD.
    ***************************************************************/
-   void assert_CCplusL_CC_Equals_CD()
+   void assert_CCplusCC_Equals_CD()
    {
       char input1[3] = {'C', 'C', '\0'};
       char input2[3] = {'C', 'C', '\0'};
@@ -680,8 +681,8 @@
    /*************** Function: assert_IVplusIV_Equals_VIII *************\
        Input: none
        Output: none
-       Description: Assert that call addNumerals('X', 'D') returns
-                    M.
+       Description: Assert that call addNumerals('IV', 'IV') returns
+                    VIII.
    ***************************************************************/
    void assert_IVplusIV_Equals_VIII()
    {
@@ -695,6 +696,29 @@
       assert(*(result + sizeof(char) * 2) == 'I');
       assert(*(result + sizeof(char) * 3) == 'I');
       assert(*(result + sizeof(char) * 4) == '\0');
+
+      free(result);
+   }
+
+   /*************** Function: assert_IXplusIX_Equals_XVIII *************\
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('IX', 'IX') returns
+                    XVIII.
+   ***************************************************************/
+   void assert_IXplusIX_Equals_XVIII()
+   {
+      char input1[3] = {'I', 'X', '\0'};
+      char input2[3] = {'I', 'X', '\0'};
+
+      char *result = addNumerals(input1, input2);
+
+      assert(*result == 'X');
+      assert(*(result + sizeof(char)) == 'V');
+      assert(*(result + sizeof(char) * 2) == 'I');
+      assert(*(result + sizeof(char) * 3) == 'I');
+      assert(*(result + sizeof(char) * 4) == 'I');
+      assert(*(result + sizeof(char) * 5) == '\0');
 
       free(result);
    }

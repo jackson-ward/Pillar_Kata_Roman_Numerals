@@ -349,6 +349,21 @@
                      concatNumeral(i, ptr3);
                   }
 
+                  if (*ptr3 == 'X')
+                  {
+                     armed = false;
+
+                     char I = 'I';
+                     char *i = &I;
+                     char V = 'V';
+                     char *v = &V;
+                     removeNumeralFromString(ptr3);
+                     concatNumeral(v, ptr3);
+                     concatNumeral(i, ptr3);
+                     concatNumeral(i, ptr3);
+                     concatNumeral(i, ptr3);
+                  }
+
                   ptr3 = ptr3 + sizeof(char);
                }
             }
