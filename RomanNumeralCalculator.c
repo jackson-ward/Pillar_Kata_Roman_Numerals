@@ -838,6 +838,15 @@
                           armed = true;
                           break;
 
+               case 'M':
+                          concatNumeral(&C, replacement);
+                          concatNumeral(&M, replacement);
+                          concatNumeral(&X, replacement);
+                          concatNumeral(&C, replacement);
+
+                          armed = true;
+                          break;
+
                 default:  break;
             }
          }
