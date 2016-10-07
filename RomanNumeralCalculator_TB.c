@@ -44,6 +44,7 @@
       assert_XLplusXL_Equals_LXXX(); // run Add Test 15 (test 27)
       assert_XCplusXC_Equals_CLXXX(); // run Add Test 16 (test 28)
       assert_CDplusCD_Equals_DCCC(); // run Add Test 17 (test 29)
+      assert_CMplusCM_Equals_MDCCC(); // run Add Test 18 (test 30)
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       
@@ -792,3 +793,27 @@
 
       free(result);
    }
+
+   /*************** Function: assert_CMplusCM_Equals_MDCCC *************\
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('CM', 'CM') returns
+                    MDCCC.
+   ***************************************************************/
+   void assert_CMplusCM_Equals_MDCCC()
+   {
+      char input1[3] = {'C', 'M', '\0'};
+      char input2[3] = {'C', 'M', '\0'};
+
+      char *result = addNumerals(input1, input2);
+
+      assert(*result == 'M');
+      assert(*(result + sizeof(char)) == 'D');
+      assert(*(result + sizeof(char) * 2) == 'C');
+      assert(*(result + sizeof(char) * 3) == 'C');
+      assert(*(result + sizeof(char) * 4) == 'C');
+      assert(*(result + sizeof(char) * 5) == '\0');
+
+      free(result);
+   }
+

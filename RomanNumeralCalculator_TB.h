@@ -38,4 +38,5 @@
    void assert_XLplusXL_Equals_LXXX();
    void assert_XCplusXC_Equals_CLXXX();
    void assert_CDplusCD_Equals_DCCC();
+   void assert_CMplusCM_Equals_MDCCC();
    #endif // TB_H

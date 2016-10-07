@@ -403,6 +403,21 @@
                      concatNumeral(c, ptr3);
                      concatNumeral(c, ptr3);
                   }
+
+                  if (*ptr3 == 'M' && offender == 'C')
+                  {
+                     armed = false;
+
+                     char D = 'D';
+                     char *d = &D;
+                     char C = 'C';
+                     char *c = &C;
+                     removeNumeralFromString(ptr3);
+                     concatNumeral(d, ptr3);
+                     concatNumeral(c, ptr3);
+                     concatNumeral(c, ptr3);
+                     concatNumeral(c, ptr3);
+                  }
                   
                   ptr3 = ptr3 + sizeof(char);
                }
