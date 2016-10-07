@@ -327,8 +327,9 @@
       {
          while (*ptr2 != '\0')
          {
-            if (*ptr == 'I' && *ptr2 == 'I')
+            if (*ptr == *ptr2)
             {
+	       char offender = *ptr;
                removeNumeralFromString(ptr);
                removeNumeralFromString(ptr2);
                armed = true;
@@ -336,7 +337,7 @@
                char *ptr3 = result;
                while (*ptr3 != '\0' && armed)
                {
-                  if (*ptr3 == 'V')
+                  if (*ptr3 == 'V' && offender == 'I')
                   {
                      armed = false;
 
@@ -349,7 +350,7 @@
                      concatNumeral(i, ptr3);
                   }
 
-                  if (*ptr3 == 'X')
+                  if (*ptr3 == 'X' && offender == 'I')
                   {
                      armed = false;
 
@@ -362,6 +363,18 @@
                      concatNumeral(i, ptr3);
                      concatNumeral(i, ptr3);
                      concatNumeral(i, ptr3);
+                  }
+
+                  if (*ptr3 == 'L' && offender == 'X')
+                  {
+                     armed = false;
+
+                     char X = 'X';
+                     char *x = &X;
+                     removeNumeralFromString(ptr3);
+                     concatNumeral(x, ptr3);
+                     concatNumeral(x, ptr3);
+                     concatNumeral(x, ptr3);
                   }
 
                   ptr3 = ptr3 + sizeof(char);
