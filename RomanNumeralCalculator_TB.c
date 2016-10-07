@@ -45,9 +45,9 @@
       assert_XCplusXC_Equals_CLXXX(); // run Add Test 16 (test 28)
       assert_CDplusCD_Equals_DCCC(); // run Add Test 17 (test 29)
       assert_CMplusCM_Equals_MDCCC(); // run Add Test 18 (test 30)
-      printf("All tests passed succesfully!\n"); // All tests succesful - message
+      assert_IL_goes_to_XLIX(); // run Result_Fix Test 1 (test 31)
 
-      
+      printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       return 0; // exit success
    }
@@ -815,5 +815,24 @@
       assert(*(result + sizeof(char) * 5) == '\0');
 
       free(result);
+   }
+
+   /*************** Function: assert_IL_goes_to_XLIX *************\
+       Input: none
+       Output: none
+       Description: Assert that call resultFix('IL') returns
+                    XLIX.
+   ***************************************************************/
+   void assert_IL_goes_to_XLIX()
+   {
+      char input[5] = {'I', 'L', '\0', '\0', '\0'};
+
+      resultFix(input);
+
+      assert(*input == 'X');
+      assert(*(input + sizeof(char)) == 'L');
+      assert(*(input + sizeof(char) * 2) == 'I');
+      assert(*(input + sizeof(char) * 3) == 'X');   
+      assert(*(input + sizeof(char) * 4) == '\0'); 
    }
 

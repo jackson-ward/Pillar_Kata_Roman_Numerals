@@ -748,3 +748,42 @@
 
       *target = *source;
    }
+
+   /*************** Function: resultFix ****************************
+
+       Input: char *input -> pointer to string to be fixed for 
+                             proper rules 
+
+      Output: none
+
+     Purpose: Detects and repairs improper subtrahend - minuend pair
+   *****************************************************************/
+   void resultFix(char *input)
+   {
+      char *ptr = input;
+
+      while (*ptr != '\0')
+      {
+         if (*ptr == 'I' && *(ptr + sizeof(char)) == 'L')
+         {
+            removeNumeralFromString(ptr);
+            removeNumeralFromString(ptr);
+            
+            char x = 'X';
+            insertNumeral(&x, ptr);
+            ptr = ptr + sizeof(char);
+
+            char l = 'L';
+            insertNumeral(&l, ptr);
+            ptr = ptr + sizeof(char);
+
+            char i = 'I';
+            insertNumeral(&i, ptr);
+            ptr = ptr + sizeof(char);
+
+            insertNumeral(&x, ptr);
+         }
+         
+         ptr = ptr + sizeof(char);
+      }
+   }
