@@ -761,30 +761,74 @@
    void resultFix(char *input)
    {
       char *ptr = input;
+      char *nxt = ptr + sizeof(char);
+      char *replacement = malloc(STRING_SIZE);
+      bool armed = false;
+      static char I, X, L, C, D;
+     
+      I = 'I';
+      X = 'X';
+      L = 'L';
+      C = 'C';
+      D = 'D';
 
+      *replacement = '\0';
+      
       while (*ptr != '\0')
       {
-         if (*ptr == 'I' && (*(ptr + sizeof(char)) == 'L' || *(ptr + sizeof(char)) == 'C'))
+         if (*ptr == 'I')
          {
+            switch (*nxt)
+            {
+               case 'L':
+                          concatNumeral(&X, replacement);
+                          concatNumeral(&L, replacement);
+                          concatNumeral(&I, replacement);
+                          concatNumeral(&X, replacement);
+                        
+			  armed = true;
+                          break;
 
-            char substitute = *(ptr + sizeof(char));
-            removeNumeralFromString(ptr);
-            removeNumeralFromString(ptr);
-            
-            char x = 'X';
-            insertNumeral(&x, ptr);
-            ptr = ptr + sizeof(char);
+               case 'C':
+                          concatNumeral(&X, replacement);
+                          concatNumeral(&C, replacement);
+                          concatNumeral(&I, replacement);
+                          concatNumeral(&X, replacement);
 
-            insertNumeral(&substitute, ptr);
-            ptr = ptr + sizeof(char);
+                          armed = true;   
+                          break;
 
-            char i = 'I';
-            insertNumeral(&i, ptr);
-            ptr = ptr + sizeof(char);
+               case 'D':
+                          concatNumeral(&C, replacement);
+                          concatNumeral(&D, replacement);
+                          concatNumeral(&X, replacement);
+                          concatNumeral(&C, replacement);
+                          concatNumeral(&I, replacement);
+                          concatNumeral(&X, replacement); 
+                          armed = true;
+                          break; 
 
-            insertNumeral(&x, ptr);
+                default:  break;
+            } 
          }
-         
-         ptr = ptr + sizeof(char);
+
+         if (armed)
+         {
+            removeNumeralFromString(ptr);
+            removeNumeralFromString(ptr);
+
+            char *ptr2 = replacement;
+            while (*ptr2 != '\0')
+            {
+               insertNumeral(ptr2, ptr);
+               
+               ptr = ptr + sizeof(char);
+               ptr2 = ptr2 + sizeof(char);
+            }
+         }
+
+         *replacement = '\0';
       }
+
+      free(replacement);
    }
