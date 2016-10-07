@@ -50,7 +50,7 @@
       assert_ID_goes_to_CDXCIX(); // run Result_Fix Test 3 (test 32)
       assert_IM_goes_to_CMXCIX(); // run Result_Fix Test 4 (test 33)
       assert_XD_goes_to_CDXC(); // run Result_Fix Test 5 (test 34)
-      assert_XM_goes_to_CMXC(); // run Result_Fix Test 6 (test 35)
+      assert_XM_goes_to_CMXC(); // run Result_Fix Test 6 (test 35)      
 
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
