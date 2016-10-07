@@ -825,6 +825,23 @@
             } 
          }
 
+         else if (*ptr == 'X')
+         {
+            switch(*nxt)
+            {
+               case 'D':
+                          concatNumeral(&C, replacement);
+                          concatNumeral(&D, replacement);
+                          concatNumeral(&X, replacement);
+                          concatNumeral(&C, replacement);
+
+                          armed = true;
+                          break;
+
+                default:  break;
+            }
+         }
+
          if (armed)
          {
             armed = false;

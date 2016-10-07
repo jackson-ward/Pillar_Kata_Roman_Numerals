@@ -49,6 +49,7 @@
       assert_IC_goes_to_XCIX(); // run Result_Fix Test 2 (test 32)
       assert_ID_goes_to_CDXCIX(); // run Result_Fix Test 3 (test 32)
       assert_IM_goes_to_CMXCIX(); // run Result_Fix Test 4 (test 33)
+      assert_XD_goes_to_CDXC(); // run Result_Fix Test 5 (test 34)
 
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
@@ -898,4 +899,23 @@
       assert(*(input + sizeof(char) * 4) == 'I');
       assert(*(input + sizeof(char) * 5) == 'X');
       assert(*(input + sizeof(char) * 6) == '\0');
+   }
+
+   /*************** Function: assert_XD_goes_to_CDXC *************\
+       Input: none
+       Output: none
+       Description: Assert that call resultFix('XD') returns
+                    CDXC.
+   ***************************************************************/
+   void assert_XD_goes_to_CDXC()
+   {
+      char input[5] = {'X', 'D', '\0', '\0', '\0'};
+
+      resultFix(input);
+
+      assert(*input == 'C');
+      assert(*(input + sizeof(char)) == 'D');
+      assert(*(input + sizeof(char) * 2) == 'X');
+      assert(*(input + sizeof(char) * 3) == 'C');  
+      assert(*(input + sizeof(char) * 4) == '\0');
    }

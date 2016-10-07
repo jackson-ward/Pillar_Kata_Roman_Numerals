@@ -44,4 +44,5 @@
    void assert_IC_goes_to_XCIX();
    void assert_ID_goes_to_CDXCIX();
    void assert_IM_goes_to_CMXCIX();
+   void assert_XD_goes_to_CDXC();
    #endif // TB_H
