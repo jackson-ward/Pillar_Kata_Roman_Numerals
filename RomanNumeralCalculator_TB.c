@@ -42,6 +42,7 @@
       assert_IVplusIV_Equals_VIII(); // run Add Test 13 (test 25)
       assert_IXplusIX_Equals_XVIII(); // run Add Test 14 (test 26)
       assert_XLplusXL_Equals_LXXX(); // run Add Test 15 (test 27)
+      assert_XCplusXC_Equals_CLXXX(); // run Add Test 16 (test 28)
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
       
@@ -742,6 +743,29 @@
       assert(*(result + sizeof(char) * 2) == 'X');
       assert(*(result + sizeof(char) * 3) == 'X');
       assert(*(result + sizeof(char) * 4) == '\0');
+
+      free(result);
+   }
+
+   /*************** Function: assert_XCplusXC_Equals_CLXXX *************\
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('XC', 'XC') returns
+                    CLXXX.
+   ***************************************************************/
+   void assert_XCplusXC_Equals_CLXXX()
+   {
+      char input1[3] = {'X', 'C', '\0'};
+      char input2[3] = {'X', 'C', '\0'};
+
+      char *result = addNumerals(input1, input2);
+
+      assert(*result == 'C');
+      assert(*(result + sizeof(char)) == 'L');
+      assert(*(result + sizeof(char) * 2) == 'X');
+      assert(*(result + sizeof(char) * 3) == 'X');
+      assert(*(result + sizeof(char) * 4) == 'X');
+      assert(*(result + sizeof(char) * 5) == '\0');
 
       free(result);
    }

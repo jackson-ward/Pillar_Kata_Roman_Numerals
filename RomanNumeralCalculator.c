@@ -377,6 +377,21 @@
                      concatNumeral(x, ptr3);
                   }
 
+                  if (*ptr3 == 'C' && offender == 'X')
+                  {
+                     armed = false;
+
+                     char L = 'L';
+                     char *l = &L;
+                     char X = 'X';
+                     char *x = &X;
+                     removeNumeralFromString(ptr3);
+                     concatNumeral(l, ptr3);
+                     concatNumeral(x, ptr3);
+                     concatNumeral(x, ptr3);
+                     concatNumeral(x, ptr3);
+                  }
+
                   ptr3 = ptr3 + sizeof(char);
                }
             }

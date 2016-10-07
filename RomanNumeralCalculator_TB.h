@@ -36,4 +36,5 @@
    void assert_IVplusIV_Equals_VIII();
    void assert_IXplusIX_Equals_XVIII();
    void assert_XLplusXL_Equals_LXXX();
+   void assert_XCplusXC_Equals_CLXXX();
    #endif // TB_H
