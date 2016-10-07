@@ -224,8 +224,7 @@
             if (*posPtr == *negPtr)
             {
                removeNumeralFromString(posPtr);
-               removeNumeralFromString(negPtr);
-               
+               removeNumeralFromString(negPtr); 
                negPtr = neg;
             }
 
@@ -235,6 +234,8 @@
             }
          }
          
+         negPtr = neg;   
+   
 	 if (*posPtr != '\0')
          {
             posPtr = posPtr + sizeof(char);

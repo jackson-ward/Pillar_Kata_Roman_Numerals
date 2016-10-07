@@ -39,6 +39,7 @@
    void assert_XCplusXC_Equals_CLXXX();
    void assert_CDplusCD_Equals_DCCC();
    void assert_CMplusCM_Equals_MDCCC();
+   void assert_MCIplusMCDXXXVI_Equals_MMDXXXVII();
 
    void assert_IL_goes_to_XLIX();
    void assert_IC_goes_to_XCIX();
