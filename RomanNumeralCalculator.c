@@ -296,7 +296,7 @@
          ptr = ptr + sizeof(char);
       } 
 
-      ptr = posa;
+      /*ptr = posa;
 
       while (*ptr != '\0')
       {
@@ -308,7 +308,7 @@
          }
          
          ptr = ptr + sizeof(char);
-      }
+      }*/
 
       ptr = posa;
       
@@ -428,7 +428,22 @@
          }
 
          ptr = ptr + sizeof(char);
-      }      
+      }
+
+      ptr = result;
+
+      while (*ptr != '\0')
+      {
+         if (compare_NumeralA_to_NumeralB(ptr, ptr + sizeof(char)) == 2)
+         {
+            char tmp = *ptr;
+            *ptr = *(ptr + sizeof(char));
+            *(ptr + sizeof(char)) = tmp;
+         }
+         
+         ptr = ptr + sizeof(char);
+      }
+      
 
       countAndCorrectForOnesRule(result);
       countAndCorrectForVsRule(result);

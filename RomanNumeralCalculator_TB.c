@@ -52,6 +52,7 @@
       assert_XD_goes_to_CDXC(); // run Result_Fix Test 5 (test 34)
       assert_XM_goes_to_CMXC(); // run Result_Fix Test 6 (test 35)      
       assert_MCIplusMCDXXXVI_Equals_MMDXXXVII(); // run Add Test 19 (test 36)   
+      assert_CDXplusCD_Equals_DCCCX(); // run Add Test 20 (test 37)
 
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
@@ -964,6 +965,29 @@
       assert(*(result + sizeof(char) * 7) == 'I');
       assert(*(result + sizeof(char) * 8) == 'I');
       assert(*(result + sizeof(char) * 9) == '\0');
+
+      free(result);
+   }
+
+   /*************** Function: assert_CDXplusCD_Equals_DCCCX *******
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('CDX', 'DCCCX') returns
+                    DCCCX.
+   ***************************************************************/
+   void assert_CDXplusCD_Equals_DCCCX()
+   {
+      char input1[4] = {'C', 'D', 'X', '\0'};
+      char input2[10] = {'C', 'D', '\0'};
+
+      char *result = addNumerals(input1, input2);
+
+      assert(*result == 'D');
+      assert(*(result + sizeof(char)) == 'C');
+      assert(*(result + sizeof(char) * 2) == 'C');
+      assert(*(result + sizeof(char) * 3) == 'C');
+      assert(*(result + sizeof(char) * 4) == 'X'); 
+      assert(*(result + sizeof(char) * 5) == '\0');
 
       free(result);
    }
