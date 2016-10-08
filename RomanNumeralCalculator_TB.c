@@ -53,6 +53,7 @@
       assert_XM_goes_to_CMXC(); // run Result_Fix Test 6 (test 35)      
       assert_MCIplusMCDXXXVI_Equals_MMDXXXVII(); // run Add Test 19 (test 36)   
       assert_CDXplusCD_Equals_DCCCX(); // run Add Test 20 (test 37)
+      assert_CVIplusX_Equals_CXVI(); // run Add Test 21 (test 38)
 
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
@@ -988,6 +989,28 @@
       assert(*(result + sizeof(char) * 3) == 'C');
       assert(*(result + sizeof(char) * 4) == 'X'); 
       assert(*(result + sizeof(char) * 5) == '\0');
+
+      free(result);
+   }
+
+   /*************** Function: assert_CVIplusX_Equals_CXVI *******
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('CVI', 'X') returns
+                    CXVI.
+   ***************************************************************/
+   void assert_CVIplusX_Equals_CXVI()
+   {
+      char input1[4] = {'C', 'V', 'I', '\0'};
+      char input2[2] = {'X', '\0'};
+
+      char *result = addNumerals(input1, input2);
+
+      assert(*result == 'C');
+      assert(*(result + sizeof(char)) == 'X');
+      assert(*(result + sizeof(char) * 2) == 'V');
+      assert(*(result + sizeof(char) * 3) == 'I');
+      assert(*(result + sizeof(char) * 4) == '\0');
 
       free(result);
    }

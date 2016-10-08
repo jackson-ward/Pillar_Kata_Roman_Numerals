@@ -285,32 +285,41 @@
       char *nega = extractNegativeElements(a);
       char *negb = extractNegativeElements(b);
 
+      char pos[STRING_SIZE];
+      *pos = '\0';
+
       cancelNumerals(posa, negb);
       cancelNumerals(posb, nega);
 
-      char *ptr = posb;
+      char *ptra = posa;
+      char *ptrb = posb;
 
-      while (*ptr != '\0')
+      while (*ptra != '\0' || *ptrb != '\0')
       {
-         concatNumeral(ptr, posa);
-         ptr = ptr + sizeof(char);
-      } 
+         int compare = compare_NumeralA_to_NumeralB(ptra, ptrb);
 
-      /*ptr = posa;
-
-      while (*ptr != '\0')
-      {
-         if (compare_NumeralA_to_NumeralB(ptr, ptr + sizeof(char)) == 2)
+         if (compare == 1 || *ptrb == '\0')
          {
-            char tmp = *ptr;
-            *ptr = *(ptr + sizeof(char));
-            *(ptr + sizeof(char)) = tmp;
+            concatNumeral(ptra, pos);
+            ptra = ptra + sizeof(char);
          }
-         
-         ptr = ptr + sizeof(char);
-      }*/
 
-      ptr = posa;
+         else if (compare == 2 || *ptra == '\0')
+         {
+            concatNumeral(ptrb, pos);
+            ptrb = ptrb + sizeof(char);
+         }
+
+         else
+         {
+            concatNumeral(ptra, pos);
+            concatNumeral(ptrb, pos);
+            ptra = ptra + sizeof(char);
+            ptrb = ptrb + sizeof(char);
+         }
+      }
+
+      char *ptr = pos;
       
       char *result = malloc(STRING_SIZE);
 
