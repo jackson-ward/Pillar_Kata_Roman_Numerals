@@ -484,24 +484,26 @@
       }
 
       char *nxt = ptr + sizeof(char);
-
-      while (*nxt != '\0')
+      while (*ptr != '\0')
       {
-         if (*ptr == 'L' && *nxt == 'L')
+         while (*nxt != '\0')
          {
-            removeNumeralFromString(nxt);
-            removeNumeralFromString(ptr);
+            if (*ptr == 'L' && *nxt == 'L')
+            {
+               removeNumeralFromString(nxt);
+               removeNumeralFromString(ptr);
 
-            char C = 'C';
-            char *c = &C;
+               char C = 'C';
+               char *c = &C;
 
-            insertNumeral(c, ptr);
-         }
+               insertNumeral(c, nxt - sizeof(char));           
+            }
 
-         ptr = nxt;
-         nxt = nxt + sizeof(char);
+            nxt = nxt + sizeof(char);
+         } 
+      
+         ptr = ptr + sizeof(char);
       }
-
    }
 
    /*************** Function: countAndCorrectForCsRule *************************
