@@ -447,23 +447,27 @@
 
       char *nxt = ptr + sizeof(char);
 
-      while (*nxt != '\0')
+      while (*ptr != '\0')
       {
-         if (*ptr == 'V' && *nxt == 'V')
+         while (*nxt != '\0')
          {
-            removeNumeralFromString(nxt);
-            removeNumeralFromString(ptr);
+            if (*ptr == 'V' && *nxt == 'V')
+            {
+               removeNumeralFromString(nxt);
+               removeNumeralFromString(ptr);
 
-            char X = 'X';
-            char *x = &X;
+               char X = 'X';
+               char *x = &X;
 
-            insertNumeral(x, ptr);
+               insertNumeral(x, nxt - sizeof(char));
+            }
+
+            nxt = nxt + sizeof(char);
          }
-
-         ptr = nxt;
-         nxt = nxt + sizeof(char);
+  
+         ptr = ptr + sizeof(char);
+         nxt = ptr + sizeof(char);
       }
-      
    }
   
    /*************** Function: countAndCorrectForLsRule *************************
@@ -503,6 +507,7 @@
          } 
       
          ptr = ptr + sizeof(char);
+         nxt = ptr + sizeof(char);
       }
    }
 
@@ -569,23 +574,27 @@
 
       char *nxt = ptr + sizeof(char);
 
-      while (*nxt != '\0')
+      while (*ptr != '\0')
       {
-         if (*ptr == 'D' && *nxt == 'D')
+         while (*nxt != '\0')
          {
-            removeNumeralFromString(nxt);
-            removeNumeralFromString(ptr);
+            if (*ptr == 'D' && *nxt == 'D')
+            {
+               removeNumeralFromString(nxt);
+               removeNumeralFromString(ptr);
 
-            char M = 'M';
-            char *m = &M;
+               char M = 'M';
+               char *m = &M;
 
-            insertNumeral(m, ptr);
+               insertNumeral(m, nxt - sizeof(char));
+            }
+
+            nxt = nxt + sizeof(char);
          }
 
-         ptr = nxt;
-         nxt = nxt + sizeof(char);
+         ptr = ptr + sizeof(char);
+         nxt = ptr + sizeof(char);
       }
-
    }
     
    /*************** Function: insertNumeral *************************
