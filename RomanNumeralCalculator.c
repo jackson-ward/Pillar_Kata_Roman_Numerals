@@ -256,7 +256,6 @@
    ***************************************************************/
    void concatNumeral(char *source, char *target)
    {
-      //char *result = malloc(STRING_SIZE);
       char *insertPos = target;
 
       while (*insertPos != '\0')
@@ -285,175 +284,20 @@
       char *nega = extractNegativeElements(a);
       char *negb = extractNegativeElements(b);
 
-      char pos[STRING_SIZE];
-      *pos = '\0';
-
-      cancelNumerals(posa, negb);
-      cancelNumerals(posb, nega);
-
-      char *ptra = posa;
-      char *ptrb = posb;
-
-      while (*ptra != '\0' || *ptrb != '\0')
-      {
-         int compare = compare_NumeralA_to_NumeralB(ptra, ptrb);
-
-         if (compare == 1 || *ptrb == '\0')
-         {
-            concatNumeral(ptra, pos);
-            ptra = ptra + sizeof(char);
-         }
-
-         else if (compare == 2 || *ptra == '\0')
-         {
-            concatNumeral(ptrb, pos);
-            ptrb = ptrb + sizeof(char);
-         }
-
-         else
-         {
-            concatNumeral(ptra, pos);
-            concatNumeral(ptrb, pos);
-            ptra = ptra + sizeof(char);
-            ptrb = ptrb + sizeof(char);
-         }
-      }
-
-      char *ptr = pos;
+      char *pos = combine(posa, posb);
+      char *neg = combine(nega, negb);
       
-      char *result = malloc(STRING_SIZE);
+      cancelNumerals(pos, neg);
 
+      char *result = malloc(STRING_SIZE);
+      char *ptr = pos;
+    
       while (*ptr != '\0')
       {
          concatNumeral(ptr, result);
          ptr = ptr + sizeof(char);
       }
       
-      ptr = negb;
-      char *ptr2 = nega;
-      bool armed = false;
-
-      while (*ptr != '\0')
-      {
-         while (*ptr2 != '\0')
-         {
-            if (*ptr == *ptr2)
-            {
-	       char offender = *ptr;
-               removeNumeralFromString(ptr);
-               removeNumeralFromString(ptr2);
-               armed = true;
-
-               char *ptr3 = result;
-               while (*ptr3 != '\0' && armed)
-               {
-                  if (*ptr3 == 'V' && offender == 'I')
-                  {
-                     armed = false;
-
-                     char I = 'I';
-                     char *i = &I;
-
-                     removeNumeralFromString(ptr3);
-                     concatNumeral(i, ptr3);
-                     concatNumeral(i, ptr3);
-                     concatNumeral(i, ptr3);
-                  }
-
-                  if (*ptr3 == 'X' && offender == 'I')
-                  {
-                     armed = false;
-
-                     char I = 'I';
-                     char *i = &I;
-                     char V = 'V';
-                     char *v = &V;
-                     removeNumeralFromString(ptr3);
-                     concatNumeral(v, ptr3);
-                     concatNumeral(i, ptr3);
-                     concatNumeral(i, ptr3);
-                     concatNumeral(i, ptr3);
-                  }
-
-                  if (*ptr3 == 'L' && offender == 'X')
-                  {
-                     armed = false;
-
-                     char X = 'X';
-                     char *x = &X;
-                     removeNumeralFromString(ptr3);
-                     concatNumeral(x, ptr3);
-                     concatNumeral(x, ptr3);
-                     concatNumeral(x, ptr3);
-                  }
-
-                  if (*ptr3 == 'C' && offender == 'X')
-                  {
-                     armed = false;
-
-                     char L = 'L';
-                     char *l = &L;
-                     char X = 'X';
-                     char *x = &X;
-                     removeNumeralFromString(ptr3);
-                     concatNumeral(l, ptr3);
-                     concatNumeral(x, ptr3);
-                     concatNumeral(x, ptr3);
-                     concatNumeral(x, ptr3);
-                  }
-                  
-                  if (*ptr3 == 'D' && offender == 'C')
-                  {
-                     armed = false;
-
-                     char C = 'C';
-                     char *c = &C;
-                     removeNumeralFromString(ptr3);
-                     concatNumeral(c, ptr3);
-                     concatNumeral(c, ptr3);
-                     concatNumeral(c, ptr3);
-                  }
-
-                  if (*ptr3 == 'M' && offender == 'C')
-                  {
-                     armed = false;
-
-                     char D = 'D';
-                     char *d = &D;
-                     char C = 'C';
-                     char *c = &C;
-                     removeNumeralFromString(ptr3);
-                     concatNumeral(d, ptr3);
-                     concatNumeral(c, ptr3);
-                     concatNumeral(c, ptr3);
-                     concatNumeral(c, ptr3);
-                  }
-                  
-                  ptr3 = ptr3 + sizeof(char);
-               }
-            }
-
-            ptr2 = ptr2 + sizeof(char);
-         }
-
-         ptr = ptr + sizeof(char);
-      }
-
-      ptr = result;
-
-      while (*ptr != '\0')
-      {
-         if (compare_NumeralA_to_NumeralB(ptr, ptr + sizeof(char)) == 2)
-         {
-            char tmp = *ptr;
-            *ptr = *(ptr + sizeof(char));
-            *(ptr + sizeof(char)) = tmp;
-         }
-         
-         ptr = ptr + sizeof(char);
-      }
-      
-
       countAndCorrectForOnesRule(result);
       countAndCorrectForVsRule(result);
       countAndCorrectForXsRule(result);
@@ -461,36 +305,15 @@
       countAndCorrectForCsRule(result);
       countAndCorrectForDsRule(result);
 
-      ptr = negb;
-      while (*ptr != '\0')
-      {
-         concatNumeral(ptr, nega);
-         ptr = ptr + sizeof(char);
-      }
-
-      ptr = nega;
-      ptr2 = result;
-
-      while (*ptr2 != '\0')
-      {
-         ptr2 = ptr2 + sizeof(char);
-      }
-
-      while (*ptr != '\0')
-      {
-         if (compare_NumeralA_to_NumeralB(ptr, ptr2) == 2)
-         {
-            insertNumeral(ptr, ptr2);
-            ptr = ptr + sizeof(char);
-         }
-         
-         ptr2 = ptr2 - sizeof(char);
-      }
+      detectAndCorrectDoubleNegatives(result, neg);
+      insertNegatives(result, neg);
 
       free(posa);
       free(posb);
+      free(pos);
       free(nega);
       free(negb);
+      free(neg);
 
       resultFix(result);
 
@@ -906,4 +729,197 @@
       }
 
       free(replacement);
+   }
+
+   char *combine(char *a, char *b)
+   {
+      char *ptra = a;
+      char *ptrb = b;
+      char *result = malloc(STRING_SIZE);
+            *result = '\0';
+
+      while (*ptra != '\0' || *ptrb != '\0')
+      {
+         int compare = compare_NumeralA_to_NumeralB(ptra, ptrb);
+
+         if (compare == 1 || *ptrb == '\0')
+         {
+            concatNumeral(ptra, result);
+            ptra = ptra + sizeof(char);
+         }
+
+         else if (compare == 2 || *ptra == '\0')
+         {
+            concatNumeral(ptrb, result);
+            ptrb = ptrb + sizeof(char);
+         }
+
+         else
+         {
+            concatNumeral(ptra, result);
+            concatNumeral(ptrb, result);
+            ptra = ptra + sizeof(char);
+            ptrb = ptrb + sizeof(char);
+         }
+      }
+
+      return result;
+   }
+
+   void detectAndCorrectDoubleNegatives(char *result, char *neg)
+   {
+      bool armed = false;
+
+      char *ptr = neg;      
+      if (*ptr == '\0') return;
+
+      char *ptr2 = ptr + sizeof(char);
+      char *ptr3 = result;
+      char *head = ptr3;
+
+      while (*ptr3 != '\0')
+      {
+         ptr3 = ptr3 + sizeof(char);
+      }
+
+      while (*ptr2 != '\0')
+      {
+            if (*ptr == *ptr2)
+            {
+               char offender = *ptr;
+               removeNumeralFromString(ptr);
+               removeNumeralFromString(ptr2);
+               armed = true;
+
+               while (ptr3 != (head - sizeof(char)) && armed)
+               {
+                  if (*ptr3 == 'V' && offender == 'I')
+                  {
+                     armed = false;
+
+                     char I = 'I';
+                     char *i = &I;
+
+                     removeNumeralFromString(ptr3);
+                     insertNumeral(i, ptr3);
+                     insertNumeral(i, ptr3);
+                     insertNumeral(i, ptr3);
+                  }
+
+                  if (*ptr3 == 'X' && offender == 'I')
+                  {
+                     armed = false;
+
+                     char I = 'I';
+                     char *i = &I;
+                     char V = 'V';
+                     char *v = &V;
+                     removeNumeralFromString(ptr3);
+                     insertNumeral(i, ptr3);
+                     insertNumeral(i, ptr3);
+                     insertNumeral(i, ptr3);
+                     insertNumeral(v, ptr3);
+                  }
+
+                  if (*ptr3 == 'L' && offender == 'X')
+                  {
+                     armed = false;
+
+                     char X = 'X';
+                     char *x = &X;
+                     removeNumeralFromString(ptr3);
+                     insertNumeral(x, ptr3);
+                     insertNumeral(x, ptr3);
+                     insertNumeral(x, ptr3);
+                  }
+
+                  if (*ptr3 == 'C' && offender == 'X')
+                  {
+                     armed = false;
+
+                     char L = 'L';
+                     char *l = &L;
+                     char X = 'X';
+                     char *x = &X;
+                     removeNumeralFromString(ptr3);
+                     insertNumeral(x, ptr3);
+                     insertNumeral(x, ptr3);
+                     insertNumeral(x, ptr3);
+                     insertNumeral(l, ptr3);
+                  }
+
+                  if (*ptr3 == 'D' && offender == 'C')
+                  {
+                     armed = false;
+
+                     char C = 'C';
+                     char *c = &C;
+                     removeNumeralFromString(ptr3);
+                     insertNumeral(c, ptr3);
+                     insertNumeral(c, ptr3);
+                     insertNumeral(c, ptr3);
+                  }
+
+                  if (*ptr3 == 'M' && offender == 'C')
+                  {
+                     armed = false;
+
+                     char D = 'D';
+                     char *d = &D;
+                     char C = 'C';
+                     char *c = &C;
+                     removeNumeralFromString(ptr3);
+                     insertNumeral(c, ptr3);
+                     insertNumeral(c, ptr3);
+                     insertNumeral(c, ptr3);
+                     insertNumeral(d, ptr3);
+                  }
+
+                  ptr3 = ptr3 - sizeof(char);
+               }
+            }
+            
+            else
+            {
+               ptr2 = ptr2 + sizeof(char);
+               ptr = ptr + sizeof(char);
+            }
+      } 
+   }
+
+   void insertNegatives(char *result, char *neg)
+   {
+      char *ptr = neg;
+      if (*ptr == '\0') return;
+
+      char *head = ptr;
+      char *ptr2 = result;
+
+      while (*ptr2 != '\0')
+      {
+         ptr2 = ptr2 + sizeof(char);
+      }
+
+      while (*ptr != '\0')
+      {
+         ptr = ptr + sizeof(char);
+      }
+
+      ptr = ptr - sizeof(char);
+
+      while (ptr != (head - sizeof(char)))
+      {
+         if (compare_NumeralA_to_NumeralB(ptr, ptr2) == 2)
+         {
+            insertNumeral(ptr, ptr2);
+            ptr = ptr - sizeof(char);
+         }
+
+         if (compare_NumeralA_to_NumeralB(ptr, ptr2) == 0)
+         {
+            ptr = ptr - sizeof(char);
+         }
+        
+         ptr2 = ptr2 - sizeof(char);
+      }
    }

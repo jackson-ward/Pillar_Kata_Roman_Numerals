@@ -30,4 +30,7 @@
    void countAndCorrectForCsRule(char *);
    void countAndCorrectForDsRule(char *);
    void resultFix(char *);
+   char *combine(char *, char *);
+   void detectAndCorrectDoubleNegatives(char *, char *);
+   void insertNegatives(char *, char *);
    #endif // ROM_NUM_CALC_H
