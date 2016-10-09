@@ -54,6 +54,7 @@
       assert_MCIplusMCDXXXVI_Equals_MMDXXXVII(); // run Add Test 19 (test 36)   
       assert_CDXplusCD_Equals_DCCCX(); // run Add Test 20 (test 37)
       assert_CVIplusX_Equals_CXVI(); // run Add Test 21 (test 38)
+      assert_XCVIplusIV_Equals_C(); // run Add Test 22 (test 39)
 
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
@@ -1011,6 +1012,25 @@
       assert(*(result + sizeof(char) * 2) == 'V');
       assert(*(result + sizeof(char) * 3) == 'I');
       assert(*(result + sizeof(char) * 4) == '\0');
+
+      free(result);
+   }
+
+   /*************** Function: assert_XCVIplusIV_Equals_C *******
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('XCVI', 'IV') returns
+                    CXVI.
+   ***************************************************************/
+   void assert_XCVIplusIV_Equals_C()
+   {
+      char input1[5] = {'X', 'C', 'V', 'I', '\0'};
+      char input2[3] = {'I', 'V', '\0'};
+
+      char *result = addNumerals(input1, input2);
+
+      assert(*result == 'C');
+      assert(*(result + sizeof(char)) == '\0');
 
       free(result);
    }

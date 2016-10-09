@@ -305,6 +305,24 @@
       countAndCorrectForCsRule(result);
       countAndCorrectForDsRule(result);
 
+      ptr = result;
+
+      char *pos2 = extractPositiveElements(result);
+      char *neg2 = extractNegativeElements(result);
+      neg = combine(neg, neg2);
+
+      cancelNumerals(pos2, neg);
+
+      ptr = pos2;
+
+      *result = '\0';
+      
+      while (*ptr != '\0')
+      {
+         concatNumeral(ptr, result);
+         ptr = ptr + sizeof(char);
+      }
+      
       detectAndCorrectDoubleNegatives(result, neg);
       insertNegatives(result, neg);
 
@@ -315,7 +333,7 @@
       free(negb);
       free(neg);
 
-      resultFix(result);
+      resultFix(result); 
 
       ptr = result; while (*ptr != '\0') { printf("%c", *ptr); ptr = ptr + sizeof(char);} printf("\n");
       
@@ -913,6 +931,7 @@
          {
             insertNumeral(ptr, ptr2);
             ptr = ptr - sizeof(char);
+            ptr2 = ptr2 + sizeof(char);
          }
 
          if (compare_NumeralA_to_NumeralB(ptr, ptr2) == 0)
