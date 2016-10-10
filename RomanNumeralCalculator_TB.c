@@ -57,6 +57,7 @@
       assert_XCVIplusIV_Equals_C(); // run Add Test 22 (test 39)
       assert_LXplusXXX_Equals_XC(); // run Add Test 23 (test 40)
       assert_IIIplusIII_Equals_VI(); // run Add Test 24 (test 41)
+      assert_XXXVIIIplusI_Equals_XXXIX(); // run Add Test 25 (test 42)
 
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
@@ -1076,4 +1077,26 @@
 
       free(result);
    }
+   
+   /*************** Function: assert_XXXVIIIplusI_Equals_XXXIX *******
+       Input: none
+       Output: none
+       Description: Assert that call addNumerals('XXXVIII', 'I') returns
+                    XXXIX.
+   ***************************************************************/
+   void assert_XXXVIIIplusI_Equals_XXXIX()
+   {
+      char input1[8] = {'X', 'X', 'X', 'V', 'I', 'I', 'I', '\0'};
+      char input2[2] = {'I', '\0'};
 
+      char *result = addNumerals(input1, input2);
+
+      assert(*result == 'X');
+      assert(*(result + sizeof(char)) == 'X');
+      assert(*(result + sizeof(char) * 2) == 'X');
+      assert(*(result + sizeof(char) * 3) == 'I');
+      assert(*(result + sizeof(char) * 4) == 'X');
+      assert(*(result + sizeof(char) * 5) == '\0');
+
+      free(result);
+   }

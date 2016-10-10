@@ -368,37 +368,54 @@
    ******************************************************************************/
    void countAndCorrectForOnesRule(char *input)
    {
-      unsigned short cnt = 0;
-      char *ones[STRING_SIZE];
-
       char *ptr = input;
+      char *ptr2;
+      bool armed = false;
+      int i = 0;
 
-      while (*ptr != '\0')
+      while(*ptr != '\0')
       {
          if (*ptr == 'I')
          {
-            ones[cnt] = ptr;
-            cnt++;
+            armed = true;
+            ptr2 = ptr;
+            i = 0;
+            while (i < 3)
+            {
+               ptr2 = ptr2 + sizeof(char);
+
+               if (*ptr2 != 'I')
+               {
+                  armed = false;
+                  ptr = ptr2;
+                  i = 3;
+               }
+
+               i++;
+            }
+
+            if (armed)
+            {
+               armed = false;
+               char I = 'I';
+               char V = 'V';
+               char *i = &I;
+               char *v = &V;
+
+               int j;
+               for (j = 0; j < 4; j++)
+               {
+                  removeNumeralFromString(ptr);
+               }
+
+               insertNumeral(v, ptr);
+               insertNumeral(i, ptr);
+
+               ptr = ptr + sizeof(char);
+            }
          }
 
          ptr = ptr + sizeof(char);
-      }
-
-      if (cnt >= 4)
-      {
-         char I = 'I';
-         char V = 'V';
-         char *i = &I;
-         char *v = &V;
-
-         int j;
-         for (j = 3; j >= 0; j--)
-         {
-            removeNumeralFromString(ones[j]);
-         }
-
-         insertNumeral(v, ones[0]);
-         insertNumeral(i, ones[0]);
       }
    }
 
@@ -412,37 +429,54 @@
    ******************************************************************************/
    void countAndCorrectForXsRule(char *input)
    {
-      unsigned short cnt = 0;
-      char *X_a[4];
-
       char *ptr = input;
+      char *ptr2;
+      bool armed = false;
+      int i = 0;
 
-      while (*ptr != '\0')
+      while(*ptr != '\0')
       {
          if (*ptr == 'X')
          {
-            X_a[cnt] = ptr;
-            cnt++;
+            armed = true;
+            ptr2 = ptr;
+            i = 0;
+            while (i < 3)
+            {
+               ptr2 = ptr2 + sizeof(char);
+
+               if (*ptr2 != 'X')
+               {
+                  armed = false;
+                  ptr = ptr2;
+                  i = 3;
+               }
+
+               i++;
+            }
+
+            if (armed)
+            {
+               armed = false;
+               char X = 'X';
+               char L = 'L';
+               char *x = &X;
+               char *l = &L;
+
+               int j;
+               for (j = 0; j < 4; j++)
+               {
+                  removeNumeralFromString(ptr);
+               }
+
+               insertNumeral(l, ptr);
+               insertNumeral(x, ptr);
+
+               ptr = ptr + sizeof(char);
+            }
          }
 
          ptr = ptr + sizeof(char);
-      }
-
-      if (cnt == 4)
-      {
-         char X = 'X';
-         char L = 'L';
-         char *x = &X;
-         char *l = &L;
-
-         int j;
-         for (j = 3; j >= 0; j--)
-         {
-            removeNumeralFromString(X_a[j]);
-         }
-
-         insertNumeral(l, X_a[0]);
-         insertNumeral(x, X_a[0]);
       }
    }
 
@@ -539,37 +573,54 @@
    ******************************************************************************/
    void countAndCorrectForCsRule(char *input)
    {
-      unsigned short cnt = 0;
-      char *C_a[4];
-
       char *ptr = input;
+      char *ptr2;
+      bool armed = false;
+      int i = 0;
 
-      while (*ptr != '\0')
+      while(*ptr != '\0')
       {
          if (*ptr == 'C')
          {
-            C_a[cnt] = ptr;
-            cnt++;
-         }
+            armed = true;
+            ptr2 = ptr;
+            i = 0;
+            while (i < 3)
+            {
+               ptr2 = ptr2 + sizeof(char);
 
+               if (*ptr2 != 'C')
+               {
+                  armed = false;
+                  ptr = ptr2;
+                  i = 3;
+               }
+
+               i++;
+            }
+
+            if (armed)
+            {
+               armed = false;
+               char C = 'C';
+               char D = 'D';
+               char *c = &C;
+               char *d = &D;
+
+               int j;
+               for (j = 0; j < 4; j++)
+               {
+                  removeNumeralFromString(ptr);
+               }
+
+               insertNumeral(d, ptr);
+               insertNumeral(c, ptr);
+
+               ptr = ptr + sizeof(char);
+            }
+         }
+    
          ptr = ptr + sizeof(char);
-      }
-
-      if (cnt == 4)
-      {
-         char C = 'C';
-         char D = 'D';
-         char *c = &C;
-         char *d = &D;
-
-         int j;
-         for (j = 3; j >= 0; j--)
-         {
-            removeNumeralFromString(C_a[j]);
-         }
-
-         insertNumeral(d, C_a[0]);
-         insertNumeral(c, C_a[0]);
       }
    }   
 
