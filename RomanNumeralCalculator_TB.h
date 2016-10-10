@@ -44,6 +44,8 @@
    void assert_CVIplusX_Equals_CXVI();
    void assert_XCVIplusIV_Equals_C();
    void assert_LXplusXXX_Equals_XC();
+   void assert_IIIplusIII_Equals_VI();
+   void assert_XXplusXXV_Equals_XLV();
 
    void assert_IL_goes_to_XLIX();
    void assert_IC_goes_to_XCIX();

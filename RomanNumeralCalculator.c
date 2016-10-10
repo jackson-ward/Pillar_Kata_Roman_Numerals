@@ -297,13 +297,6 @@
          concatNumeral(ptr, result);
          ptr = ptr + sizeof(char);
       }
-      
-      countAndCorrectForOnesRule(result);
-      countAndCorrectForVsRule(result);
-      countAndCorrectForXsRule(result);
-      countAndCorrectForLsRule(result);      
-      countAndCorrectForCsRule(result);
-      countAndCorrectForDsRule(result);
 
       ptr = result;
 
@@ -325,6 +318,31 @@
       
       detectAndCorrectDoubleNegatives(result, neg);
       insertNegatives(result, neg);
+
+      countAndCorrectForOnesRule(result);
+      countAndCorrectForVsRule(result);
+      countAndCorrectForXsRule(result);
+      countAndCorrectForLsRule(result);
+      countAndCorrectForCsRule(result);
+      countAndCorrectForDsRule(result);      
+
+      pos2 = extractPositiveElements(result);
+      neg2 = extractNegativeElements(result);
+
+      cancelNumerals(pos2, neg2);
+
+      ptr = pos2;
+
+      *result = '\0';
+
+      while (*ptr != '\0')
+      {
+         concatNumeral(ptr, result);
+         ptr = ptr + sizeof(char);
+      }
+
+      detectAndCorrectDoubleNegatives(result, neg2);
+      insertNegatives(result, neg2);
 
       free(posa);
       free(posb);
@@ -351,7 +369,7 @@
    void countAndCorrectForOnesRule(char *input)
    {
       unsigned short cnt = 0;
-      char *ones[4];
+      char *ones[STRING_SIZE];
 
       char *ptr = input;
 
@@ -366,7 +384,7 @@
          ptr = ptr + sizeof(char);
       }
 
-      if (cnt == 4)
+      if (cnt >= 4)
       {
          char I = 'I';
          char V = 'V';
@@ -379,8 +397,8 @@
             removeNumeralFromString(ones[j]);
          }
 
-         concatNumeral(i, input);
-         concatNumeral(v, input);
+         insertNumeral(v, ones[0]);
+         insertNumeral(i, ones[0]);
       }
    }
 
@@ -423,8 +441,8 @@
             removeNumeralFromString(X_a[j]);
          }
 
-         concatNumeral(x, input);
-         concatNumeral(l, input);
+         insertNumeral(l, X_a[0]);
+         insertNumeral(x, X_a[0]);
       }
    }
 
@@ -550,8 +568,8 @@
             removeNumeralFromString(C_a[j]);
          }
 
-         concatNumeral(c, input);
-         concatNumeral(d, input);
+         insertNumeral(d, C_a[0]);
+         insertNumeral(c, C_a[0]);
       }
    }   
 
