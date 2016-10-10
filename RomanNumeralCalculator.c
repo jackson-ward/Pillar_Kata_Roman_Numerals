@@ -370,8 +370,26 @@
 
       cancelNumerals(pos, neg);
 
+      char *ptr = neg;
+      while(*ptr != '\0')
+      {
+         if(*ptr == 'V')
+         {
+            removeNumeralFromString(ptr);
+            int j;
+            for (j = 0; j < 5; j++)
+            {
+               char I = 'I';
+               char *i = &I;
+               insertNumeral(i, ptr);
+            }
+         }
+
+         ptr = ptr + sizeof(char);
+      }
+
       char *result = malloc(STRING_SIZE);
-      char *ptr = pos;
+      ptr = pos;
 
       while (*ptr != '\0')
       {
@@ -379,7 +397,6 @@
          ptr = ptr + sizeof(char);
       }
 
-     
       detectAndCorrectDoubleNegatives(result, neg);
       //insertNegatives(result, neg); 
       countAndCorrectForOnesRule(result);
@@ -415,8 +432,8 @@
       free(negb);
       free(neg);
 
-      resultFix(result); 
-
+      resultFix(result);
+      
       ptr = result; while (*ptr != '\0') { printf("%c", *ptr); ptr = ptr + sizeof(char);} printf("\n");
 
       return result;
