@@ -33,4 +33,5 @@
    char *combine(char *, char *);
    void detectAndCorrectDoubleNegatives(char *, char *);
    void insertNegatives(char *, char *);
+   char *subtractNumerals(char *, char *);
    #endif // ROM_NUM_CALC_H

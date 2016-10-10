@@ -351,10 +351,91 @@
       free(negb);
       free(neg);
 
-      resultFix(result); 
+      //resultFix(result); 
 
       ptr = result; while (*ptr != '\0') { printf("%c", *ptr); ptr = ptr + sizeof(char);} printf("\n");
       
+      return result;
+   }
+
+   char *subtractNumerals(char *a, char *b)
+   {
+      char *posa = extractPositiveElements(a);
+      char *negb = extractPositiveElements(b);
+      char *nega = extractNegativeElements(a);
+      char *posb = extractNegativeElements(b);
+   
+      char *pos = combine(posa, posb);
+      char *neg = combine(nega, negb);
+
+      cancelNumerals(pos, neg);
+
+      char *result = malloc(STRING_SIZE);
+      char *ptr = pos;
+
+      while (*ptr != '\0')
+      {
+         concatNumeral(ptr, result);
+         ptr = ptr + sizeof(char);
+      }
+
+      ptr = result;
+
+      char *pos2 = extractPositiveElements(result);
+      char *neg2 = extractNegativeElements(result);
+      neg = combine(neg, neg2);
+
+      cancelNumerals(pos2, neg);
+
+      ptr = pos2;
+
+      *result = '\0';
+
+      while (*ptr != '\0')
+      {
+         concatNumeral(ptr, result);
+         ptr = ptr + sizeof(char);
+      }
+
+      detectAndCorrectDoubleNegatives(result, neg);
+      insertNegatives(result, neg);
+
+      countAndCorrectForOnesRule(result);
+      countAndCorrectForVsRule(result);
+      countAndCorrectForXsRule(result);
+      countAndCorrectForLsRule(result);
+      countAndCorrectForCsRule(result);
+      countAndCorrectForDsRule(result);
+
+      pos2 = extractPositiveElements(result);
+      neg2 = extractNegativeElements(result);
+
+      cancelNumerals(pos2, neg2);
+
+      ptr = pos2;
+
+      *result = '\0';
+
+      while (*ptr != '\0')
+      {
+         concatNumeral(ptr, result);
+         ptr = ptr + sizeof(char);
+      }
+
+      detectAndCorrectDoubleNegatives(result, neg2);
+      insertNegatives(result, neg2);
+
+      free(posa);
+      free(posb);
+      free(pos);
+      free(nega);
+      free(negb);
+      free(neg);
+
+      //resultFix(result); 
+
+      ptr = result; while (*ptr != '\0') { printf("%c", *ptr); ptr = ptr + sizeof(char);} printf("\n");
+
       return result;
    }
 
