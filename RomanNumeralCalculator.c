@@ -396,6 +396,17 @@
             }
          }
 
+         else if (*ptr  == 'D')
+         {
+            removeNumeralFromString(ptr);
+            for (j = 0; j < 5; j++)
+            {
+               char C = 'C';
+               char *c = &C;
+               insertNumeral(c, ptr);
+            }
+         }
+
          ptr = ptr + sizeof(char);
       }
 

@@ -64,6 +64,7 @@
       assert_VminusIII_Equals_II(); // Sub Test 4 (test 46)
       assert_LminusXLV_Equals_V(); // Sub Test 5 (test 47)
       assert_CminusL_Equals_L(); // Sub Test 6 (test 48)
+      assert_MminusD_Equals_D(); // Sub Test 7 (test 49)
 
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
@@ -1225,6 +1226,25 @@
       char *result = subtractNumerals(input1, input2);
 
       assert(*(result) == 'L');
+      assert(*(result + sizeof(char)) == '\0');
+
+      free(result);
+   }
+
+   /*************** Function: assert_MminusD_Equals_D *******
+       Input: none
+       Output: none
+       Description: Assert that call subtractNumerals('M', 'D') returns
+                    D.
+   ***************************************************************/
+   void assert_MminusD_Equals_D()
+   {
+      char input1[2] = {'M', '\0'};
+      char input2[2] = {'D', '\0'};
+
+      char *result = subtractNumerals(input1, input2);
+
+      assert(*(result) == 'D');
       assert(*(result + sizeof(char)) == '\0');
 
       free(result);
