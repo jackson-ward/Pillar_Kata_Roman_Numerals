@@ -63,6 +63,7 @@
       assert_XLIXminusI_Equals_XLVIII(); // Sub Test 3 (test 45)
       assert_VminusIII_Equals_II(); // Sub Test 4 (test 46)
       assert_LminusXLV_Equals_V(); // Sub Test 5 (test 47)
+      assert_CminusL_Equals_L(); // Sub Test 6 (test 48)
 
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
@@ -1209,3 +1210,23 @@
 
       free(result);
    }
+
+   /*************** Function: assert_CminusL_Equals_L *******
+       Input: none
+       Output: none
+       Description: Assert that call subtractNumerals('C', 'L') returns
+                    L.
+   ***************************************************************/
+   void assert_CminusL_Equals_L()
+   {
+      char input1[2] = {'C', '\0'};
+      char input2[2] = {'L', '\0'};
+
+      char *result = subtractNumerals(input1, input2);
+
+      assert(*(result) == 'L');
+      assert(*(result + sizeof(char)) == '\0');
+
+      free(result);
+   }
+

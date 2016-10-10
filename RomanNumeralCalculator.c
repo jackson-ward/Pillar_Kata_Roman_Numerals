@@ -371,17 +371,28 @@
       cancelNumerals(pos, neg);
 
       char *ptr = neg;
+      int j;
       while(*ptr != '\0')
       {
          if(*ptr == 'V')
          {
             removeNumeralFromString(ptr);
-            int j;
             for (j = 0; j < 5; j++)
             {
                char I = 'I';
                char *i = &I;
                insertNumeral(i, ptr);
+            }
+         }
+    
+         else if(*ptr == 'L')
+         {
+            removeNumeralFromString(ptr);
+            for (j = 0; j < 5; j++)
+            {
+               char X = 'X';
+               char *x = &X;
+               insertNumeral(x, ptr);
             }
          }
 
