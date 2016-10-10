@@ -432,7 +432,7 @@
       free(negb);
       free(neg);
 
-      //resultFix(result); 
+      resultFix(result); 
 
       ptr = result; while (*ptr != '\0') { printf("%c", *ptr); ptr = ptr + sizeof(char);} printf("\n");
 
