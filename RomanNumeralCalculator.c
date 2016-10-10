@@ -380,26 +380,12 @@
       }
 
       ptr = result;
-
-      char *pos2 = extractPositiveElements(result);
-      char *neg2 = extractNegativeElements(result);
-      neg = combine(neg, neg2);
-
-      cancelNumerals(pos2, neg);
-
-      ptr = pos2;
-
-      *result = '\0';
-
-      while (*ptr != '\0')
-      {
-         concatNumeral(ptr, result);
-         ptr = ptr + sizeof(char);
-      }
-
+      printf("before insert = %s\n",result);
+      printf("neg = %s\n",neg);
       detectAndCorrectDoubleNegatives(result, neg);
+      printf("neg after correct = %s\n", neg);
       insertNegatives(result, neg);
-
+      printf("after insert = %s\n", result);
       countAndCorrectForOnesRule(result);
       countAndCorrectForVsRule(result);
       countAndCorrectForXsRule(result);
@@ -407,8 +393,8 @@
       countAndCorrectForCsRule(result);
       countAndCorrectForDsRule(result);
 
-      pos2 = extractPositiveElements(result);
-      neg2 = extractNegativeElements(result);
+      char *pos2 = extractPositiveElements(result);
+      char *neg2 = extractNegativeElements(result);
 
       cancelNumerals(pos2, neg2);
 
@@ -967,7 +953,7 @@
             {
                char offender = *ptr;
                removeNumeralFromString(ptr);
-               removeNumeralFromString(ptr2);
+               removeNumeralFromString(ptr);
                armed = true;
 
                while (ptr3 != (head - sizeof(char)) && armed)
@@ -998,6 +984,27 @@
                      insertNumeral(i, ptr3);
                      insertNumeral(i, ptr3);
                      insertNumeral(v, ptr3);
+                  }
+
+                  if (*ptr3 == 'L' && offender == 'I')
+                  {
+                     armed = false;
+
+                     char I = 'I';
+                     char *i = &I;
+                     char L = 'L';
+                     char *l = &L;
+                     char X = 'X';
+                     char *x = &X;
+                     char V = 'V';
+                     char *v = &V;
+                     removeNumeralFromString(ptr3);
+                     insertNumeral(i, ptr3);
+                     insertNumeral(i, ptr3);
+                     insertNumeral(i, ptr3);
+                     insertNumeral(v, ptr3);
+                     insertNumeral(l, ptr3);
+                     insertNumeral(x, ptr3);
                   }
 
                   if (*ptr3 == 'L' && offender == 'X')

@@ -60,6 +60,7 @@
       assert_XXXVIIIplusI_Equals_XXXIX(); // run Add Test 25 (test 42)
       assert_IIminusI_Equals_I(); // Sub Test 1 (test 43)
       assert_LminusI_Equals_XLIX(); // Sub Test 2 (test 44)
+      assert_XLIXminusI_Equals_XLVIII(); // Sub Test 3 (test 45)
 
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
@@ -1140,6 +1141,30 @@
       assert(*(result + sizeof(char) * 2) == 'I');
       assert(*(result + sizeof(char) * 3) == 'X');
       assert(*(result + sizeof(char) * 4) == '\0');
+
+      free(result);
+   }
+  
+   /*************** Function: assert_XLIXminusI_Equals_XLVIII *******
+       Input: none
+       Output: none
+       Description: Assert that call subtractNumerals('XLIX', 'I') returns
+                    XLVIII.
+   ***************************************************************/
+   void assert_XLIXminusI_Equals_XLVIII()
+   {
+      char input1[5] = {'X', 'L', 'I', 'X', '\0'};
+      char input2[2] = {'I', '\0'};
+
+      char *result = subtractNumerals(input1, input2);
+
+      assert(*result == 'X');
+      assert(*(result + sizeof(char)) == 'L');
+      assert(*(result + sizeof(char) * 2) == 'V');
+      assert(*(result + sizeof(char) * 3) == 'I');
+      assert(*(result + sizeof(char) * 4) == 'I');
+      assert(*(result + sizeof(char) * 5) == 'I');
+      assert(*(result + sizeof(char) * 6) == '\0');
 
       free(result);
    }

@@ -50,6 +50,7 @@
 
    void assert_IIminusI_Equals_I();
    void assert_LminusI_Equals_XLIX();
+   void assert_XLIXminusI_Equals_XLVIII();
 
    void assert_IL_goes_to_XLIX();
    void assert_IC_goes_to_XCIX();
