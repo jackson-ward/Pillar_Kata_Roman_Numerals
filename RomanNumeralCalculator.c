@@ -379,13 +379,9 @@
          ptr = ptr + sizeof(char);
       }
 
-      ptr = result;
-      printf("before insert = %s\n",result);
-      printf("neg = %s\n",neg);
+     
       detectAndCorrectDoubleNegatives(result, neg);
-      printf("neg after correct = %s\n", neg);
-      insertNegatives(result, neg);
-      printf("after insert = %s\n", result);
+      //insertNegatives(result, neg); 
       countAndCorrectForOnesRule(result);
       countAndCorrectForVsRule(result);
       countAndCorrectForXsRule(result);
@@ -395,6 +391,7 @@
 
       char *pos2 = extractPositiveElements(result);
       char *neg2 = extractNegativeElements(result);
+      neg2 = combine(neg, neg2);
 
       cancelNumerals(pos2, neg2);
 
@@ -942,13 +939,15 @@
       char *ptr3 = result;
       char *head = ptr3;
 
-      while (*ptr3 != '\0')
-      {
-         ptr3 = ptr3 + sizeof(char);
-      }
-
       while (*ptr2 != '\0')
-      {
+      {  
+         ptr3 = result;
+
+         while (*ptr3 != '\0')
+         {
+            ptr3 = ptr3 + sizeof(char);
+         }
+
             if (*ptr == *ptr2)
             {
                char offender = *ptr;
