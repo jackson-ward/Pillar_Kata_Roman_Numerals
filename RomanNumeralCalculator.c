@@ -1324,7 +1324,20 @@
 
    bool detectOverflow(char *input)
    {
-      if (*input == 'M' && (*(input + sizeof(char)) == 'M') && (*(input + sizeof(char) * 2) == 'M') && (*(input + sizeof(char) * 3) == 'M')) return true;
+      int trigger = 4;
+      char *ptr = input;
+
+      while (*ptr != '\0' && trigger > 0)
+      {
+         if (*ptr == 'M') 
+         {
+            trigger--;
+         }
+     
+         ptr = ptr + sizeof(char);
+      }
+      
+      if (trigger == 0) return true;
 
       return false;
    }

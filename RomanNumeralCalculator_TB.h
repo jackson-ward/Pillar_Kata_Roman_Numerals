@@ -67,4 +67,5 @@
    void assert_XM_goes_to_CMXC();
 
    void assert_detectOverflow_MMMM_Returns_True();
+   void assert_detectOverflow_M_Returns_False();
    #endif // TB_H
