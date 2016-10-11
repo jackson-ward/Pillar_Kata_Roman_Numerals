@@ -8,6 +8,8 @@
    #ifndef TB_H
    #define TB_H
 
+   #include <stdbool.h>
+
    void assertDetectionOfProperNumeralInput();
    void assertCorrectResultWhenComparingTheSizeOf2CharacterNumerals();
    void assertStringNumeralPositveElementsAreCategorizedCorrectly();
@@ -63,4 +65,6 @@
    void assert_IM_goes_to_CMXCIX();
    void assert_XD_goes_to_CDXC();
    void assert_XM_goes_to_CMXC();
+
+   void assert_detectOverflow_MMMM_Returns_True();
    #endif // TB_H

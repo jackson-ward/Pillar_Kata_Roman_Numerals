@@ -66,6 +66,7 @@
       assert_CminusL_Equals_L(); // Sub Test 6 (test 48)
       assert_MminusD_Equals_D(); // Sub Test 7 (test 49)
       assert_LminusXI_Equals_XXXIX(); // Sub Test 8 (test 50)
+      assert_detectOverflow_MMMM_Returns_True(); // Overflow Test 1 (test 51)
 
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
@@ -1272,4 +1273,17 @@
       assert(*(result + sizeof(char) * 5) == '\0');
 
       free(result);
+   }
+
+   /*************** Function: assert_detectOverflow_MMMM_Returns_True *******
+       Input: none
+       Output: none
+       Description: Assert that call detectOverflow('MMMM') returns
+                    true.
+   ***************************************************************/
+   void assert_detectOverflow_MMMM_Returns_True()
+   {
+      char *input = "MMMM";
+
+      assert(detectOverflow(input) == true);
    }

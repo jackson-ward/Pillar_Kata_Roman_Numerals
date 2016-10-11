@@ -25,6 +25,7 @@
    #endif
 
    bool checkForProperInputChar(char *);
+   bool detectOverflow(char *);
    int  compare_NumeralA_to_NumeralB(char *, char *);
    char *extractPositiveElements(char *);
    char *extractNegativeElements(char *);

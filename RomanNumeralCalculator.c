@@ -1321,3 +1321,10 @@
          ptr2 = ptr2 - sizeof(char);
       }
    }
+
+   bool detectOverflow(char *input)
+   {
+      if (*input == 'M' && (*(input + sizeof(char)) == 'M') && (*(input + sizeof(char) * 2) == 'M') && (*(input + sizeof(char) * 3) == 'M')) return true;
+
+      return false;
+   }
