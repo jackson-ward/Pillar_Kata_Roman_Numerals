@@ -473,7 +473,7 @@
       char *a = input1;
       char *b = input2;
 
-      char *result = addNumerals(a, b);
+      char *result = addNumerals(a, b); 
 
       assert(*result == 'I');
       assert(*(result + sizeof(char)) == 'I');

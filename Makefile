@@ -5,7 +5,7 @@
 # CREATED ON: 10/3/2016
 
 CC = gcc
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -DRUN_TESTS
 
 default: romanNumeralCalculatorTest
 
@@ -19,4 +19,4 @@ RomanNUmeralCalculator_TB.o: RomanNumeralCalculator.c RomanNumeralCalculator.h R
 	$(CC) $(CFLAGS) -c RomanNumeralCalculator_TB.c
 
 clean:
-	$(RM) testBench *.o *~
+	$(RM) runTests *.o *~

@@ -277,6 +277,9 @@
 
      Purpose: Produces string by adding two input strings
    ***************************************************************/
+
+   #ifdef RUN_TESTS
+
    char *addNumerals(char *a, char *b)
    {
       char *posa = extractPositiveElements(a);
@@ -289,60 +292,60 @@
       
       cancelNumerals(pos, neg);
 
-      char *result = malloc(STRING_SIZE);
+      char *intm = malloc(STRING_SIZE);
       char *ptr = pos;
     
       while (*ptr != '\0')
       {
-         concatNumeral(ptr, result);
+         concatNumeral(ptr, intm);
          ptr = ptr + sizeof(char);
       }
 
-      ptr = result;
-
-      char *pos2 = extractPositiveElements(result);
-      char *neg2 = extractNegativeElements(result);
+      char *pos2 = extractPositiveElements(intm);
+      char *neg2 = extractNegativeElements(intm);
       neg = combine(neg, neg2);
 
       cancelNumerals(pos2, neg);
 
       ptr = pos2;
 
-      *result = '\0';
+      *intm = '\0';
       
       while (*ptr != '\0')
       {
-         concatNumeral(ptr, result);
+         concatNumeral(ptr, intm);
          ptr = ptr + sizeof(char);
       }
       
-      detectAndCorrectDoubleNegatives(result, neg);
-      insertNegatives(result, neg);
+      detectAndCorrectDoubleNegatives(intm, neg);
+      insertNegatives(intm, neg);
 
-      countAndCorrectForOnesRule(result);
-      countAndCorrectForVsRule(result);
-      countAndCorrectForXsRule(result);
-      countAndCorrectForLsRule(result);
-      countAndCorrectForCsRule(result);
-      countAndCorrectForDsRule(result);      
+      countAndCorrectForOnesRule(intm);
+      countAndCorrectForVsRule(intm);
+      countAndCorrectForXsRule(intm);
+      countAndCorrectForLsRule(intm);
+      countAndCorrectForCsRule(intm);
+      countAndCorrectForDsRule(intm);      
 
-      pos2 = extractPositiveElements(result);
-      neg2 = extractNegativeElements(result);
+      pos2 = extractPositiveElements(intm);
+      neg2 = extractNegativeElements(intm);
 
       cancelNumerals(pos2, neg2);
 
       ptr = pos2;
 
-      *result = '\0';
+      *intm = '\0';
 
       while (*ptr != '\0')
       {
-         concatNumeral(ptr, result);
+         concatNumeral(ptr, intm);
          ptr = ptr + sizeof(char);
       }
 
-      detectAndCorrectDoubleNegatives(result, neg2);
-      insertNegatives(result, neg2);
+      detectAndCorrectDoubleNegatives(intm, neg2);
+      insertNegatives(intm, neg2);
+
+      resultFix(intm);
 
       free(posa);
       free(posb);
@@ -350,13 +353,100 @@
       free(nega);
       free(negb);
       free(neg);
-
-      resultFix(result); 
-
-      ptr = result; while (*ptr != '\0') { printf("%c", *ptr); ptr = ptr + sizeof(char);} printf("\n");
       
-      return result;
+      return intm; 
    }
+
+   #else
+   
+   char addNumerals(char *a, char *b, char *result)
+   {
+      char *posa = extractPositiveElements(a);
+      char *posb = extractPositiveElements(b);
+      char *nega = extractNegativeElements(a);
+      char *negb = extractNegativeElements(b);
+
+      char *pos = combine(posa, posb);
+      char *neg = combine(nega, negb);
+
+      cancelNumerals(pos, neg);
+
+      char *intm = malloc(STRING_SIZE);
+      char *ptr = pos;
+
+      while (*ptr != '\0')
+      {
+         concatNumeral(ptr, intm);
+         ptr = ptr + sizeof(char);
+      }
+
+      char *pos2 = extractPositiveElements(intm);
+      char *neg2 = extractNegativeElements(intm);
+      neg = combine(neg, neg2);
+
+      cancelNumerals(pos2, neg);
+
+      ptr = pos2;
+
+      *intm = '\0';
+
+      while (*ptr != '\0')
+      {
+         concatNumeral(ptr, intm);
+         ptr = ptr + sizeof(char);
+      }
+
+      detectAndCorrectDoubleNegatives(intm, neg);
+      insertNegatives(intm, neg);
+
+      countAndCorrectForOnesRule(intm);
+      countAndCorrectForVsRule(intm);
+      countAndCorrectForXsRule(intm);
+      countAndCorrectForLsRule(intm);
+      countAndCorrectForCsRule(intm);
+      countAndCorrectForDsRule(intm);
+
+      pos2 = extractPositiveElements(intm);
+      neg2 = extractNegativeElements(intm);
+
+      cancelNumerals(pos2, neg2);
+
+      ptr = pos2;
+
+      *intm = '\0';
+
+      while (*ptr != '\0')
+      {
+         concatNumeral(ptr, intm);
+         ptr = ptr + sizeof(char);
+      }
+
+      detectAndCorrectDoubleNegatives(intm, neg2);
+      insertNegatives(intm, neg2);
+
+      resultFix(intm);
+
+      ptr = intm;
+      *result = '\0';
+
+      while (*ptr != '\0')
+      {
+         concatNumeral(ptr, result);
+         ptr = ptr + sizeof(char);
+      }
+
+      free(posa);
+      free(posb);
+      free(pos);
+      free(nega);
+      free(negb);
+      free(neg);
+      free(intm);
+
+      return 'I'; // placeholder
+   }
+
+   #endif
 
    /*************** Function: subtractNumerals ********************
 
@@ -368,6 +458,9 @@
      Purpose: Produces string by subtracting an input string from
               another.
    ***************************************************************/
+   
+   #ifdef RUN_TESTS
+   
    char *subtractNumerals(char *a, char *b)
    {
       char *pos = combine(extractPositiveElements(a), extractNegativeElements(b));
@@ -381,6 +474,26 @@
        
       return addNumerals(pos, empty);
    }
+
+   #else 
+
+   char subtractNumerals(char *a, char *b, char *result)
+   {
+      char *pos = combine(extractPositiveElements(a), extractNegativeElements(b));
+      char *neg = combine(extractNegativeElements(a), extractPositiveElements(b));
+
+      cancelNumerals(pos, neg);
+
+      borrowCancel(pos, neg);
+
+      char *empty = "";
+
+      addNumerals(pos, empty, result);
+
+      return 'I' // placeholder
+   }
+
+   #endif
 
    /*************** Function: borrowCancel ********************
 

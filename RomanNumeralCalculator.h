@@ -7,19 +7,29 @@
    */
 
    #ifndef ROM_NUM_CALC_H
-   #define ROM_NUMCALC_H
+   #define ROM_NUM_CALC_H
    
    #include <stdbool.h> // import for use of type <bool>
 
    #define STRING_SIZE sizeof(char)*31
+
    // Function Declarations
+
+   #ifdef RUN_TESTS     
+   char *addNumerals(char *, char *);      /////  Functions Used In TDD  /////
+   char *subtractNumerals(char *, char *); ///////////////////////////////////
+
+   #else
+   char addNumerals(char *, char *, char *);      /////  Functions Used In Production  /////
+   char subtractNumerals(char *, char *, char *); //////////////////////////////////////////
+   #endif
 
    bool checkForProperInputChar(char *);
    int  compare_NumeralA_to_NumeralB(char *, char *);
    char *extractPositiveElements(char *);
    char *extractNegativeElements(char *);
+   char *combine(char *, char *);
    void concatNumeral(char *, char *);
-   char *addNumerals(char *, char *);
    void removeNumeralFromString(char *);
    void cancelNumerals(char *, char *);
    void countAndCorrectForOnesRule(char *);
@@ -30,11 +40,8 @@
    void countAndCorrectForCsRule(char *);
    void countAndCorrectForDsRule(char *);
    void resultFix(char *);
-   char *combine(char *, char *);
    void detectAndCorrectDoubleNegatives(char *, char *);
    void insertNegatives(char *, char *);
-   char *subtractNumerals(char *, char *);
-   char *subtractNumerals_BorrowMethod(char *a, char *b);
    void borrowCancel(char *, char *);
    void breakup (char *, char *);
    #endif // ROM_NUM_CALC_H
