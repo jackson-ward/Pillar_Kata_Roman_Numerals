@@ -1117,8 +1117,8 @@
    ***************************************************************/
    void assert_IIminusI_Equals_I()
    {
-      char input1[3] = {'I', 'I', '\0'};
-      char input2[2] = {'I', '\0'};
+      char input1[STRING_SIZE] = {'I', 'I', '\0'};
+      char input2[STRING_SIZE] = {'I', '\0'};
 
       char *result = subtractNumerals(input1, input2);
 
@@ -1136,8 +1136,8 @@
    ***************************************************************/
    void assert_LminusI_Equals_XLIX()
    {
-      char input1[2] = {'L', '\0'};
-      char input2[2] = {'I', '\0'};
+      char input1[STRING_SIZE] = {'L', '\0'};
+      char input2[STRING_SIZE] = {'I', '\0'};
 
       char *result = subtractNumerals(input1, input2);
 
@@ -1158,8 +1158,8 @@
    ***************************************************************/
    void assert_XLIXminusI_Equals_XLVIII()
    {
-      char input1[5] = {'X', 'L', 'I', 'X', '\0'};
-      char input2[2] = {'I', '\0'};
+      char input1[STRING_SIZE] = {'X', 'L', 'I', 'X', '\0'};
+      char input2[STRING_SIZE] = {'I', '\0'};
 
       char *result = subtractNumerals(input1, input2);
 
@@ -1182,8 +1182,8 @@
    ***************************************************************/
    void assert_VminusIII_Equals_II()
    {
-      char input1[2] = {'V', '\0'};
-      char input2[4] = {'I', 'I', 'I', '\0'};
+      char input1[STRING_SIZE] = {'V', '\0'};
+      char input2[STRING_SIZE] = {'I', 'I', 'I', '\0'};
 
       char *result = subtractNumerals(input1, input2);
 
@@ -1202,8 +1202,8 @@
    ***************************************************************/
    void assert_LminusXLV_Equals_V()
    {
-      char input1[2] = {'L', '\0'};
-      char input2[4] = {'X', 'L', 'V', '\0'};
+      char input1[STRING_SIZE] = {'L', '\0'};
+      char input2[STRING_SIZE] = {'X', 'L', 'V', '\0'};
 
       char *result = subtractNumerals(input1, input2);
 
@@ -1221,8 +1221,8 @@
    ***************************************************************/
    void assert_CminusL_Equals_L()
    {
-      char input1[2] = {'C', '\0'};
-      char input2[2] = {'L', '\0'};
+      char input1[STRING_SIZE] = {'C', '\0'};
+      char input2[STRING_SIZE] = {'L', '\0'};
 
       char *result = subtractNumerals(input1, input2);
 
@@ -1240,8 +1240,8 @@
    ***************************************************************/
    void assert_MminusD_Equals_D()
    {
-      char input1[2] = {'M', '\0'};
-      char input2[2] = {'D', '\0'};
+      char input1[STRING_SIZE] = {'M', '\0'};
+      char input2[STRING_SIZE] = {'D', '\0'};
 
       char *result = subtractNumerals(input1, input2);
 

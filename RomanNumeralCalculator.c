@@ -351,142 +351,174 @@
       free(negb);
       free(neg);
 
-      //resultFix(result); 
+      resultFix(result); 
 
       ptr = result; while (*ptr != '\0') { printf("%c", *ptr); ptr = ptr + sizeof(char);} printf("\n");
       
       return result;
    }
 
-   char *subtractNumerals_BorrowMethod(char *a, char *b)
-   {
-      char brokenL[STRING_SIZE] = {'X', 'X', 'X', 'X', 'X', '\0'};
+   /*************** Function: subtractNumerals ********************
 
-      cancelNumerals(brokenL, b);
+       Input: char *a, char*b -> point to the heads of the strings
+                                 to be added
 
-      removeNumeralFromString(brokenL);
+      Output: char *result   ->    pointer to "difference" string
 
-      int j;
-      char *replacement = "VIIIII";
-      for (j = 0; j < 6; j++)
-      {
-         concatNumeral(&replacement[j], brokenL);
-      }
-
-      cancelNumerals(brokenL, b);
-
-      char *empty = "";
-
-      return addNumerals(brokenL, empty);
-   }
-
+     Purpose: Produces string by subtracting an input string from
+              another.
+   ***************************************************************/
    char *subtractNumerals(char *a, char *b)
    {
+      char *pos = combine(extractPositiveElements(a), extractNegativeElements(b));
+      char *neg = combine(extractNegativeElements(a), extractPositiveElements(b));
 
-      if (*a == 'L' && *b == 'X' && (*(b + sizeof(char)) == 'I'))
+      cancelNumerals(pos, neg);
+     
+      borrowCancel(pos, neg);
+
+      char *empty = "";
+       
+      return addNumerals(pos, empty);
+   }
+
+   /*************** Function: borrowCancel ********************
+
+       Input: char *pos, char *neg -> pos points to the positive
+              elements of the numerals and neg points to the 
+              negative.
+
+      Output: none
+
+     Purpose: Recursive function which borrows from larger
+              numerals to allow for cancellation of smaller pos
+              and neg numerals. Calls itself recursively until
+              neg is an empty string.
+   ***************************************************************/
+   void borrowCancel(char *pos, char *neg)
+   {
+     
+      if (*neg == '\0') return;
+
+      char *ptr = pos;
+      if (*ptr == '\0') return;
+
+      while (*(ptr + sizeof(char)) != '\0') 
       {
-         return subtractNumerals_BorrowMethod(a, b);
+         ptr = ptr + sizeof(char);
       }
 
-      char *posa = extractPositiveElements(a);
-      char *negb = extractPositiveElements(b);
-      char *nega = extractNegativeElements(a);
-      char *posb = extractNegativeElements(b);
-   
-      char *pos = combine(posa, posb);
-      char *neg = combine(nega, negb);
+      while (ptr != (pos - sizeof(char)))
+      {
+         if (compare_NumeralA_to_NumeralB(ptr, neg) == 1)
+         {
+            breakup(ptr, neg);
+            
+            ptr = pos - sizeof(char);
+         }
+
+         else
+         {
+            ptr = ptr - sizeof(char);
+         }
+      }
 
       cancelNumerals(pos, neg);
 
-      char *ptr = neg;
-      int j;
-      while(*ptr != '\0')
+      borrowCancel(pos, neg);
+   }
+
+   /*************** Function: breakup ****************************
+
+       Input: char *big, char *small -> big points to character to
+               breakup, small points to character that is the 
+              smallest size *big needs to be broken up into.
+
+      Output: none
+
+     Purpose: Breaks up *big into smaller numerals including the
+              numeral *small.
+   ***************************************************************/
+   void breakup(char *big, char *small)
+   {
+      static char *vi = "IIIII";
+      static char *xi = "IIIIIV";
+      static char *xv = "VV";
+      static char *li = "IIIIIVXXXX";
+      static char *lv = "VVXXXX";
+      static char *lx = "XXXXX";
+      static char *ci = "IIIIIVXXXXL";
+      static char *cv = "VVXXXXL";
+      static char *cx = "XXXXXL";
+      static char *cl = "LL";
+      static char *di = "IIIIIVXXXXLCCCC";
+      static char *dv = "VVXXXXLCCCC";
+      static char *dx = "XXXXXLCCCC";
+      static char *dl = "LLCCCC";
+      static char *dc = "CCCCC";
+      static char *mi = "IIIIIXXXXLCCCCD";
+      static char *mv = "VVXXXXLCCCCD";
+      static char *mx = "XXXXXLCCCCD";
+      static char *ml = "LLCCCCD";
+      static char *mc = "CCCCCD";
+      static char *md = "DD";
+      static char *empty = "";
+
+      char *replacement;
+
+      switch (*big)
       {
-         if(*ptr == 'V')
-         {
-            removeNumeralFromString(ptr);
-            for (j = 0; j < 5; j++)
-            {
-               char I = 'I';
-               char *i = &I;
-               insertNumeral(i, ptr);
-            }
-         }
-    
-         else if(*ptr == 'L')
-         {
-            removeNumeralFromString(ptr);
-            for (j = 0; j < 5; j++)
-            {
-               char X = 'X';
-               char *x = &X;
-               insertNumeral(x, ptr);
-            }
-         }
+         case 'V':
+                   replacement = &vi[0];
+                   break;
 
-         else if (*ptr  == 'D')
-         {
-            removeNumeralFromString(ptr);
-            for (j = 0; j < 5; j++)
-            {
-               char C = 'C';
-               char *c = &C;
-               insertNumeral(c, ptr);
-            }
-         }
+         case 'X':
+                        if (*small == 'I') replacement = &xi[0];
+                   else if (*small == 'V') replacement = &xv[0];
+                   break;
 
-         ptr = ptr + sizeof(char);
-      }
+         case 'L':
+                        if (*small == 'I') replacement = &li[0];
+                   else if (*small == 'V') replacement = &lv[0];
+                   else if (*small == 'X') replacement = &lx[0];
+                   break;
 
-      char *result = malloc(STRING_SIZE);
-      ptr = pos;
+         case 'C':
+                        if (*small == 'I') replacement = &ci[0];
+                   else if (*small == 'V') replacement = &cv[0];
+                   else if (*small == 'X') replacement = &cx[0];
+                   else if (*small == 'L') replacement = &cl[0];
+                   break;
 
-      while (*ptr != '\0')
-      {
-         concatNumeral(ptr, result);
-         ptr = ptr + sizeof(char);
-      }
+         case 'D':
+                        if (*small == 'I') replacement = &di[0];
+                   else if (*small == 'V') replacement = &dv[0];
+                   else if (*small == 'X') replacement = &dx[0];
+                   else if (*small == 'L') replacement = &dl[0];
+                   else if (*small == 'C') replacement = &dc[0];
+                   break;
+  
+         case 'M':
+                        if (*small == 'I') replacement = &mi[0];
+                   else if (*small == 'V') replacement = &mv[0];
+                   else if (*small == 'X') replacement = &mx[0];
+                   else if (*small == 'L') replacement = &ml[0];
+                   else if (*small == 'C') replacement = &mc[0];
+                   else if (*small == 'D') replacement = &md[0];
+                   break;
 
-      detectAndCorrectDoubleNegatives(result, neg);
-      //insertNegatives(result, neg); 
-      countAndCorrectForOnesRule(result);
-      countAndCorrectForVsRule(result);
-      countAndCorrectForXsRule(result);
-      countAndCorrectForLsRule(result);
-      countAndCorrectForCsRule(result);
-      countAndCorrectForDsRule(result);
+          default:
+                   replacement = &empty[0];  
+                   break;
+       }
 
-      char *pos2 = extractPositiveElements(result);
-      char *neg2 = extractNegativeElements(result);
-      neg2 = combine(neg, neg2);
+       removeNumeralFromString(big);
 
-      cancelNumerals(pos2, neg2);
-
-      ptr = pos2;
-
-      *result = '\0';
-
-      while (*ptr != '\0')
-      {
-         concatNumeral(ptr, result);
-         ptr = ptr + sizeof(char);
-      }
-
-      detectAndCorrectDoubleNegatives(result, neg2);
-      insertNegatives(result, neg2);
-
-      free(posa);
-      free(posb);
-      free(pos);
-      free(nega);
-      free(negb);
-      free(neg);
-
-      resultFix(result);
-      
-      ptr = result; while (*ptr != '\0') { printf("%c", *ptr); ptr = ptr + sizeof(char);} printf("\n");
-
-      return result;
+       while (*replacement != '\0')
+       {
+          insertNumeral(replacement, big);
+          replacement = replacement + sizeof(char);
+       }
    }
 
    /*************** Function: countAndCorrectForOnesRule *************************
