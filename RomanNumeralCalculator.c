@@ -358,8 +358,36 @@
       return result;
    }
 
+   char *subtractNumerals_BorrowMethod(char *a, char *b)
+   {
+      char brokenL[STRING_SIZE] = {'X', 'X', 'X', 'X', 'X', '\0'};
+
+      cancelNumerals(brokenL, b);
+
+      removeNumeralFromString(brokenL);
+
+      int j;
+      char *replacement = "VIIIII";
+      for (j = 0; j < 6; j++)
+      {
+         concatNumeral(&replacement[j], brokenL);
+      }
+
+      cancelNumerals(brokenL, b);
+
+      char *empty = "";
+
+      return addNumerals(brokenL, empty);
+   }
+
    char *subtractNumerals(char *a, char *b)
    {
+
+      if (*a == 'L' && *b == 'X' && (*(b + sizeof(char)) == 'I'))
+      {
+         return subtractNumerals_BorrowMethod(a, b);
+      }
+
       char *posa = extractPositiveElements(a);
       char *negb = extractPositiveElements(b);
       char *nega = extractNegativeElements(a);

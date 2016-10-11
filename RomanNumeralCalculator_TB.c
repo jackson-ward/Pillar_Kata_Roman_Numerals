@@ -65,6 +65,7 @@
       assert_LminusXLV_Equals_V(); // Sub Test 5 (test 47)
       assert_CminusL_Equals_L(); // Sub Test 6 (test 48)
       assert_MminusD_Equals_D(); // Sub Test 7 (test 49)
+      assert_LminusXI_Equals_XXXIX(); // Sub Test 8 (test 50)
 
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
@@ -1250,3 +1251,25 @@
       free(result);
    }
 
+   /*************** Function: assert_LminusXI_Equals_XXXIX *******
+       Input: none
+       Output: none
+       Description: Assert that call subtractNumerals('L', 'XI') returns
+                    XXXIX.
+   ***************************************************************/
+   void assert_LminusXI_Equals_XXXIX()
+   {
+      char input1[STRING_SIZE] = {'L', '\0'};
+      char input2[STRING_SIZE] = {'X', 'I', '\0'};
+
+      char *result = subtractNumerals(input1, input2);
+
+      assert(*(result) == 'X');
+      assert(*(result + sizeof(char)) == 'X');
+      assert(*(result + sizeof(char) * 2) == 'X');
+      assert(*(result + sizeof(char) * 3) == 'I');
+      assert(*(result + sizeof(char) * 4) == 'X');
+      assert(*(result + sizeof(char) * 5) == '\0');
+
+      free(result);
+   }
