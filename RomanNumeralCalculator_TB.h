@@ -58,6 +58,7 @@
    void assert_CminusL_Equals_L();
    void assert_MminusD_Equals_D();
    void assert_LminusXI_Equals_XXXIX();
+   void assert_detectLargerSubtrahend_I_II_Returns_True();
 
    void assert_IL_goes_to_XLIX();
    void assert_IC_goes_to_XCIX();

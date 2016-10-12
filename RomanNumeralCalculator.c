@@ -1338,4 +1338,11 @@
       return false;
    }
 
+   bool detectLargerSubtrahend(char *a, char *b)
+   {
+      if (*a == 'I' && *b == 'I' && *(b + sizeof(char)) == 'I') return true;
+
+      return false;
+   }
+
    
