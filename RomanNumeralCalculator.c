@@ -1340,7 +1340,30 @@
 
    bool detectLargerSubtrahend(char *a, char *b)
    {
-      if (*a == 'I' && *b == 'I' && *(b + sizeof(char)) == 'I') return true;
+      char *ptr = a;
+      char *ptr2 = b;
+
+      while (*ptr != '\0' && *ptr2 != '\0')
+      {
+         if (compare_NumeralA_to_NumeralB(ptr, ptr2) == 2)
+         {
+            if (*(ptr + sizeof(char)) == '\0') return true;
+            else if (compare_NumeralA_to_NumeralB(ptr + sizeof(char), ptr2) == 1) return false;
+            else return true; 
+         }
+
+         else if (compare_NumeralA_to_NumeralB(ptr, ptr2) == 1)
+         {
+            if (*(ptr2 + sizeof(char)) == '\0') return false;
+            else if (compare_NumeralA_to_NumeralB(ptr, ptr2 + sizeof(char)) == 2) return true;
+            else return false;
+         }
+
+         ptr = ptr + sizeof(char);
+         ptr2 = ptr2 + sizeof(char);
+      }
+
+      if (*ptr == '\0' && *ptr2 != '\0') return true;
 
       return false;
    }

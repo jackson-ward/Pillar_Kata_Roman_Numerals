@@ -70,6 +70,7 @@
       assert_detectOverflow_M_Returns_False(); // Overflow Test 2 (test 52)
       assert_detectOverflow_MMMCM_Returns_False(); // Overflow Test 3 (test 53)
       assert_detectLargerSubtrahend_I_II_Returns_True(); // Sub Test 9 (test 54)
+      assert_detectLargerSubtrahend_MMCM_MMM_Returns_True(); // Sub Test 10 (test 55)
 
       printf("All tests passed succesfully!\n"); // All tests succesful - message
 
@@ -1321,11 +1322,23 @@
        Output: none
        Description: Assert that call detectLargerSubtrahend("I", "II") returns True
    ***************************************************************/
-
    void assert_detectLargerSubtrahend_I_II_Returns_True()
    {
       char *input1 = "I";
       char *input2 = "II";
+
+      assert(detectLargerSubtrahend(input1, input2) == true);
+   }
+
+   /*************** Function: assert_detectLargerSubtrahend_MMCM_MMM_Returns_True *******
+       Input: none
+       Output: none
+       Description: Assert that call detectLargerSubtrahend("MMCM", "MMM") returns True
+   ***************************************************************/
+   void assert_detectLargerSubtrahend_MMCM_MMM_Returns_True()
+   {
+      char *input1 = "MMCM";
+      char *input2 = "MMM";
 
       assert(detectLargerSubtrahend(input1, input2) == true);
    }
