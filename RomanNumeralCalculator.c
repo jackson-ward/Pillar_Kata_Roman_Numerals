@@ -1327,17 +1327,15 @@
       int trigger = 4;
       char *ptr = input;
 
-      while (*ptr != '\0' && trigger > 0)
+      while (*ptr == 'M')
       {
-         if (*ptr == 'M') 
-         {
-            trigger--;
-         }
-     
+         trigger--;
          ptr = ptr + sizeof(char);
       }
       
-      if (trigger == 0) return true;
+      if (trigger <= 0) return true;
 
       return false;
    }
+
+   

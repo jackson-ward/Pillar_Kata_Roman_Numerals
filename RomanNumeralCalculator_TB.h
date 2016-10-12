@@ -68,4 +68,5 @@
 
    void assert_detectOverflow_MMMM_Returns_True();
    void assert_detectOverflow_M_Returns_False();
+   void assert_detectOverflow_MMMCM_Returns_False();
    #endif // TB_H
