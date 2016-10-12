@@ -22,9 +22,9 @@
    ***************************************************************/
    bool checkForProperInputChar(char *inputChar)
    {
-      bool result = false;
+      bool result = false; // initialize return variable to false
 
-      switch ( *inputChar )
+      switch ( *inputChar ) 
       {
          case 'I' : 
          case 'V' : 
@@ -33,12 +33,13 @@
          case 'C' :
          case 'D' :
          case 'M' :
-	    result = true;
-         break;
-         default : break; 
+	    	     result = true; // if the input char matches one of these cases then set return variable to true
+         	     break;
+
+         default  :  break; 
       }
       
-      return result;
+      return result; 
    }
 
    /*********** Function: compare_NumeralA_to_NumeralB ***************
@@ -316,7 +317,7 @@
          concatNumeral(ptr, intm);
          ptr = ptr + sizeof(char);
       }
-      
+
       detectAndCorrectDoubleNegatives(intm, neg);
       insertNegatives(intm, neg);
 
@@ -361,6 +362,20 @@
    
    char addNumerals(char *a, char *b, char *result)
    {
+      char *ptr = a;
+      while (*ptr != '\0')
+      {
+         if(!checkForProperInputChar(ptr)) return 'I';
+         ptr = ptr + sizeof(char);
+      }
+
+      ptr = b;
+      while (*ptr != '\0')
+      {
+         if(!checkForProperInputChar(ptr)) return 'I';
+         ptr = ptr + sizeof(char);
+      }
+
       char *posa = extractPositiveElements(a);
       char *posb = extractPositiveElements(b);
       char *nega = extractNegativeElements(a);
@@ -372,7 +387,7 @@
       cancelNumerals(pos, neg);
 
       char *intm = malloc(STRING_SIZE);
-      char *ptr = pos;
+      ptr = pos;
 
       while (*ptr != '\0')
       {
@@ -443,7 +458,23 @@
       free(neg);
       free(intm);
 
-      return 'I'; // placeholder
+      if (detectOverflow(result))
+      {
+         char *max = "MMMCMXCIX";
+         *result = '\0';
+         
+         ptr = &max[0];
+
+         while (*ptr != '\0')
+         {
+            concatNumeral(ptr, result);
+            ptr = ptr + sizeof(char);
+         }
+
+         return 'X';
+      }
+
+      return 'C'; // placeholder
    }
 
    #endif
@@ -479,6 +510,30 @@
 
    char subtractNumerals(char *a, char *b, char *result)
    {
+      char returnChar = 'C';
+
+      char *ptr = a;
+      while (*ptr != '\0')
+      {
+         if(!checkForProperInputChar(ptr)) return 'I';
+         ptr = ptr + sizeof(char);
+      }
+
+      ptr = b;
+      while (*ptr != '\0')
+      {
+         if(!checkForProperInputChar(ptr)) return 'I';
+         ptr = ptr + sizeof(char);
+      }
+
+      if (detectLargerSubtrahend(a, b))
+      {
+         char *swp = a;
+         a = b;
+         b = swp;
+
+         returnChar = 'V';
+      }
       char *pos = combine(extractPositiveElements(a), extractNegativeElements(b));
       char *neg = combine(extractNegativeElements(a), extractPositiveElements(b));
 
@@ -487,10 +542,10 @@
       borrowCancel(pos, neg);
 
       char *empty = "";
-
+      
       addNumerals(pos, empty, result);
 
-      return 'I' // placeholder
+      return returnChar;
    }
 
    #endif
