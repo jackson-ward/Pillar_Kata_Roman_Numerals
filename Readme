@@ -1,0 +1,34 @@
+////////////////////////////////////////////////////////////////////////////////////
+
+     *	Roman NUmeral Calculator Library  *
+
+	Developed by Jackson Ward as a solution
+          to Pillar Technology's Kata Excercise.
+
+Use: C Language Library for adding or subtracting Roman Numerals
+
+To Build: 
+
+            1) Version used during Test Driven Developement:
+
+                 Enter: make
+
+            2) Release Version:
+
+                 Enter: make example
+
+
+
+To Run Tests using version 1:
+
+	1) After building, enter: ./runTests
+
+
+
+To Use Example Program with version 2:
+
+        1) After building, enter: ./exampleProgram <function> <operand1> <operand2>
+
+           Function can be 'a' for add or 's' for subtract
+
+///////////////////////////////////////////////////////////////////////////////////
